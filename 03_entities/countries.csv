@@ -1,0 +1,63 @@
+country_id,name,confederation
+ARG,Argentina,CONMEBOL
+BRA,Brazil,CONMEBOL
+URU,Uruguay,CONMEBOL
+COL,Colombia,CONMEBOL
+CHI,Chile,CONMEBOL
+PER,Peru,CONMEBOL
+ECU,Ecuador,CONMEBOL
+PAR,Paraguay,CONMEBOL
+BOL,Bolivia,CONMEBOL
+VEN,Venezuela,CONMEBOL
+ENG,England,UEFA
+ESP,Spain,UEFA
+ITA,Italy,UEFA
+GER,Germany,UEFA
+FRA,France,UEFA
+POR,Portugal,UEFA
+NED,Netherlands,UEFA
+BEL,Belgium,UEFA
+CRO,Croatia,UEFA
+DEN,Denmark,UEFA
+SWE,Sweden,UEFA
+NOR,Norway,UEFA
+POL,Poland,UEFA
+SUI,Switzerland,UEFA
+AUT,Austria,UEFA
+CZE,Czechia,UEFA
+SCO,Scotland,UEFA
+WAL,Wales,UEFA
+IRL,Republic of Ireland,UEFA
+NIR,Northern Ireland,UEFA
+SRB,Serbia,UEFA
+UKR,Ukraine,UEFA
+TUR,Turkey,UEFA
+GRE,Greece,UEFA
+RUS,Russia,UEFA
+HUN,Hungary,UEFA
+ROU,Romania,UEFA
+MEX,Mexico,CONCACAF
+USA,United States,CONCACAF
+CAN,Canada,CONCACAF
+CRC,Costa Rica,CONCACAF
+JAM,Jamaica,CONCACAF
+PAN,Panama,CONCACAF
+HON,Honduras,CONCACAF
+JPN,Japan,AFC
+KOR,South Korea,AFC
+AUS,Australia,AFC
+IRN,Iran,AFC
+KSA,Saudi Arabia,AFC
+QAT,Qatar,AFC
+CHN,China,AFC
+SEN,Senegal,CAF
+MAR,Morocco,CAF
+EGY,Egypt,CAF
+NGA,Nigeria,CAF
+CIV,Côte d'Ivoire,CAF
+GHA,Ghana,CAF
+ALG,Algeria,CAF
+CMR,Cameroon,CAF
+TUN,Tunisia,CAF
+RSA,South Africa,CAF
+NZL,New Zealand,OFC

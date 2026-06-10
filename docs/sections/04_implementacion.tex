@@ -1,0 +1,135 @@
+\section{Implementación}
+\label{sec:impl}
+
+Esta sección documenta cómo está cableado el repositorio para producir las tablas de las que parten los modelos.
+
+\subsection{Capas del pipeline}
+
+El pipeline tiene cuatro capas con responsabilidades claras:
+
+\begin{enumerate}[label=\textbf{L\arabic*.}]
+  \item \textbf{Ingestion} (\texttt{06\_ingestion/}): scrapers y \emph{loaders} que persisten datos crudos en \texttt{01\_data\_raw/} con caché HTML/JSON.
+  \item \textbf{Entities} (\texttt{03\_entities/}): catálogos maestros \texttt{players.csv}, \texttt{teams.csv}, \texttt{countries.csv}, \texttt{competitions.csv} con IDs canónicos prefijados por fuente (\texttt{fbref\_<id>}, \texttt{sb\_<id>}).
+  \item \textbf{Features} (\texttt{07\_features/}): scripts que toman crudos y producen tablas planas listas para ML en \texttt{02\_data\_processed/}.
+  \item \textbf{Models} (\texttt{08\_models/}) y \textbf{Correlations} (\texttt{09\_correlations/}): consumen las tablas procesadas.
+\end{enumerate}
+
+\subsection{Scripts por fuente}
+
+\subsubsection{FBref}
+
+\begin{itemize}[noitemsep]
+  \item \texttt{fbref\_scraper.py}: stats agregadas por jugador-temporada, 5 \emph{stat types} disponibles vía soccerdata (\texttt{standard}, \texttt{shooting}, \texttt{playing\_time}, \texttt{misc}, \texttt{keeper}).
+  \item \texttt{fbref\_match\_scraper.py}: stats por jugador-partido (\texttt{summary} y \texttt{keepers}). Una request HTTP por partido (caché HTML reutilizable).
+\end{itemize}
+
+\subsubsection{StatsBomb}
+
+\begin{itemize}[noitemsep]
+  \item \texttt{statsbomb\_loader.py}: descarga matches, events, lineups por competición. CLI con \texttt{-{}-list}, \texttt{-{}-competition}, \texttt{-{}-season}.
+  \item \texttt{statsbomb\_aggregate.py}: roll-up por jugador-partido de las stats principales (goles, asistencias, xG, pases, tackles, intercepciones, faltas, dribles).
+  \item \texttt{statsbomb\_entities.py}: \emph{append-only} de jugadores y equipos a los catálogos.
+\end{itemize}
+
+\subsubsection{Understat}
+
+\begin{itemize}[noitemsep]
+  \item \texttt{understat\_scraper.py}: stats agregadas por jugador-temporada y por jugador-partido, con xG calculado por modelo propio de Understat.
+\end{itemize}
+
+\subsubsection{ClubElo}
+
+\begin{itemize}[noitemsep]
+  \item \texttt{clubelo\_scraper.py}: ratings diarios por club; usado como feature de fuerza del rival.
+\end{itemize}
+
+\subsection{Scripts de \emph{features}}
+
+\begin{itemize}[noitemsep]
+  \item \texttt{build\_player\_season.py}: une las 5 \emph{stat types} de FBref por (player, team, league, season). Output: \texttt{fbref\_Big5\_player\_season.parquet} ($\sim 17\,500$ filas, 85 columnas).
+  \item \texttt{build\_player\_match.py}: enriquece el \texttt{summary} de FBref con el \texttt{schedule} (fecha, local/visitante, oponente). Output: \texttt{fbref\_<comp>\_player\_match.parquet}.
+  \item \texttt{build\_discipline\_setpieces.py}: agrega cards, fouls, corners, throw-ins, goal kicks y free kicks desde los eventos StatsBomb. Outputs: \texttt{statsbomb\_player\_match\_discipline.parquet}, \texttt{statsbomb\_team\_match\_setpieces.parquet}.
+\end{itemize}
+
+\subsection{Schemas de los outputs principales}
+
+\subsubsection{\texttt{fbref\_Big5\_player\_season.parquet}}
+
+Una fila por jugador y temporada. Identidad: \texttt{(player, team, league, season)}.\\
+Columnas con sufijo \texttt{\_\_<stat>}: \texttt{Performance\_Gls\_\_standard}, \texttt{Standard\_Sh\_\_shooting}, \texttt{Performance\_CrdY\_\_misc}, etc.
+
+\subsubsection{\texttt{statsbomb\_player\_match.parquet}}
+
+Una fila por jugador y partido. 28 columnas: \texttt{player\_id, match\_id, team\_id, opponent\_id, competition\_id, season, date, is\_home, minutes\_played, goals, assists, shots, shots\_on\_target, xg, passes\_attempted, passes\_completed, key\_passes, dribbles\_attempted, dribbles\_completed, tackles, interceptions, fouls\_committed, fouls\_drawn, \ldots}
+
+\subsubsection{\texttt{statsbomb\_player\_match\_discipline.parquet}}
+
+Una fila por jugador y partido. Cards y fouls desagregados:
+\begin{itemize}[noitemsep]
+  \item \texttt{yellow\_cards}, \texttt{second\_yellows}, \texttt{red\_cards}
+  \item \texttt{fouls\_committed}, \texttt{fouls\_drawn}
+  \item \texttt{fouls\_committed\_def\_third}, \texttt{fouls\_committed\_mid\_third}, \texttt{fouls\_committed\_att\_third}
+\end{itemize}
+
+\subsubsection{\texttt{statsbomb\_team\_match\_setpieces.parquet}}
+
+Una fila por equipo y partido. Counts de \emph{set pieces}:
+\begin{itemize}[noitemsep]
+  \item \texttt{corners\_for}, \texttt{free\_kicks\_for}, \texttt{throw\_ins\_for}, \texttt{goal\_kicks\_for}
+  \item Mismo set con \texttt{\_against} para los recibidos.
+\end{itemize}
+
+\subsection{Flujo de procesamiento}
+
+\begin{verbatim}
+                +-----------------+
+                |  Fuentes web    |
+                | (FBref, SB, US, |
+                |  ClubElo, etc.) |
+                +--------+--------+
+                         |
+                         v
+                +-----------------+
+                |  06_ingestion/  |
+                | (scrapers,      |
+                |  loaders)       |
+                +--------+--------+
+                         |
+                         v
+                +-----------------+
+                |  01_data_raw/   |
+                | (parquet + HTML |
+                |  cache)         |
+                +--------+--------+
+                         |
+              +----------+----------+
+              |                     |
+              v                     v
+     +-----------------+   +-----------------+
+     |  03_entities/   |   |  07_features/   |
+     | (players.csv,   |   | (build_*.py)    |
+     |  teams.csv...)  |   +--------+--------+
+     +-----------------+            |
+                                    v
+                          +-------------------+
+                          | 02_data_processed |
+                          | (parquet, ML-     |
+                          |  ready tables)    |
+                          +---------+---------+
+                                    |
+                                    v
+                          +-------------------+
+                          | 08_models/        |
+                          | 09_correlations/  |
+                          +-------------------+
+\end{verbatim}
+
+\subsection{Cómo extender con una nueva fuente}
+
+\begin{enumerate}[label=\textbf{E\arabic*.}]
+  \item Agregar \texttt{06\_ingestion/<source>\_loader.py} siguiendo el patrón existente: salida en \texttt{01\_data\_raw/<entity>/<source>\_<scope>.parquet}, caché en \texttt{01\_data\_raw/\_cache/<source>/}.
+  \item Usar \texttt{lib.io.write\_parquet} (compresión zstd nivel 9 enforzada).
+  \item Prefijar todos los IDs nuevos con \texttt{<source>\_} (por ejemplo \texttt{us\_} para Understat).
+  \item Si la fuente requiere \emph{append} a los catálogos maestros, crear \texttt{<source>\_entities.py} análogo al de StatsBomb.
+  \item Documentar quirks y rate limits en \texttt{.claude/skills/<source>-ingest/SKILL.md}.
+\end{enumerate}

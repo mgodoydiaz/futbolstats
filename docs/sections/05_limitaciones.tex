@@ -1,0 +1,65 @@
+\section{Limitaciones y trabajo futuro}
+\label{sec:limitaciones}
+
+Esta sección discute los principales puntos débiles del pipeline actual y caminos para extenderlo.
+
+\subsection{Cobertura desigual entre fuentes}
+
+La cobertura de StatsBomb \emph{Open Data} es excelente en profundidad (eventos individuales con \emph{freeze-frame}) pero limitada en amplitud: cubre torneos internacionales y un puñado de temporadas-liga seleccionadas. No hay cobertura continua de Big~5 europeas con event data abiertos.
+
+FBref, en contraste, tiene cobertura continua de Big~5 y otras ligas, pero solo a nivel agregado o de \emph{match summary} (counts), sin eventos individuales. La consecuencia práctica es asimétrica:
+
+\begin{itemize}[noitemsep]
+  \item Modelos de jugador-partido para Copa~América, World Cup, Champions League (datos StatsBomb): se pueden construir con todas las métricas \emph{expected} del catálogo.
+  \item Modelos de jugador-partido para Premier League 2024-25: se construyen con counts de FBref \texttt{summary} y agregados StatsBomb donde haya overlap; xCorners y xThrows requerirían \emph{otra} fuente (WhoScored, API-Football pago).
+\end{itemize}
+
+\subsection{xG en Big~5 vía FBref}
+
+soccerdata, al scrapear la página \emph{Big 5 European Leagues Combined / shooting}, no recupera el \emph{supergroup} ``Expected'' (xG, npxG, etc.). La inspección del HTML cacheado lo confirma: el HTML servido a soccerdata carece del bloque. Si bien las páginas por liga individual sí lo tienen, el wrapper actual no las consulta.
+
+\textbf{Mitigación elegida.} Agregar Understat como fuente complementaria. Understat publica su propio modelo xG para Big~5 + RFPL desde 2014; no es idéntico al de StatsBomb pero está bien calibrado y es ampliamente usado en la literatura.
+
+\textbf{Caveat.} Los xG de Understat y StatsBomb \emph{no son intercambiables} para un mismo tiro: usan features distintas (Understat no tiene \emph{freeze-frame}). Para análisis longitudinal usar siempre la misma fuente.
+
+\subsection{Sesgos de los modelos xG y derivados}
+
+\subsubsection{Calidad del rematador}
+
+xG \emph{no} incluye al rematador como feature. Esto es deliberado: si el modelo se enterara de quién patea, la diferencia $G - \mathrm{xG}$ dejaría de medir finalización individual. Pero implica que xG no es una estimación insesgada de la probabilidad real de gol cuando el rematador es atípico (Messi, Mbappé). Esos jugadores \emph{deben} estar arriba de su xG sistemáticamente.
+
+\subsubsection{Sesgo del rival y del entorno}
+
+Los modelos xG abiertos no usan al equipo defensor ni al arquero como features. Esto inflará la xG contra arqueros muy buenos y la deflará contra defensas que conceden sólo tiros lejanos. Para modelos individuales este sesgo es chico; para modelos de \emph{partido} es relevante y motiva el uso de ClubElo o equivalentes como feature de contexto.
+
+\subsection{xCards y la variable árbitro}
+
+Modelar \emph{expected cards} sin la identidad del árbitro deja fuera buena parte de la varianza: los árbitros difieren enormemente en su umbral de amonestación. StatsBomb \emph{Open Data} no expone el árbitro en sus archivos públicos. FBref sí lo tiene en su tabla de \texttt{schedule}.
+
+\textbf{Mitigación futura.} Joinear \texttt{statsbomb\_player\_match\_discipline.parquet} con \texttt{fbref\_<comp>\_schedule\_<season>.parquet} cuando exista overlap (limitado, dada la asimetría de cobertura).
+
+\subsection{Sesgo de selección en eventos defensivos}
+
+Eventos defensivos como \texttt{Tackle}, \texttt{Interception} o \texttt{Block} están sujetos a sesgo de selección: un equipo que tiene posesión todo el partido no tiene oportunidad de hacer interceptaciones. Las métricas \emph{expected} sobre estos eventos deberían ajustar por exposición (minutos defendiendo, pases del rival permitidos en zona), o reportarse como \emph{tasa por exposición}, no como count crudo.
+
+\subsection{Identificación de jugadores entre fuentes}
+
+soccerdata no expone los \texttt{player\_id} hex de FBref. Esto fuerza al proyecto a sintetizar IDs por \texttt{(player\_name, team)}, lo que rompe cuando un jugador cambia de equipo a mitad de temporada o cuando dos jugadores comparten nombre. La solución correcta es scrapear directamente la página de jugador de FBref (que sí expone el hex ID) y mantener una tabla de \emph{mappings} entre fuentes.
+
+\subsection{Splits temporales y \emph{data leakage}}
+
+Todos los modelos del proyecto deben usar splits temporales (entrenar en temporada $T-1$, validar en $T$). Aleatorizar filas es \emph{data leakage} grueso: un jugador presente en train y test simultáneamente vuelve la métrica de error optimista en órdenes de magnitud.
+
+Adicionalmente, las \emph{features} de \emph{rolling form} (\emph{e.g.}, ``goles últimos 5 partidos'') deben calcularse con un \texttt{shift(1)} para no incluir el partido actual. El script \texttt{shots\_baseline.py} ya implementa esta convención y debe usarse como plantilla.
+
+\subsection{Líneas de trabajo futuro}
+
+\begin{enumerate}[label=\textbf{F\arabic*.}]
+  \item \textbf{xCards condicionado por árbitro}: scrapear referees desde FBref \texttt{schedule}, joinear con eventos StatsBomb, entrenar un modelo con árbitro como efecto fijo / aleatorio.
+  \item \textbf{Modelos jerárquicos bayesianos}: efectos parcialmente \emph{pooled} por jugador, equipo y temporada. Implementables con PyMC; mejoran cuando hay poca data por entidad.
+  \item \textbf{xT con datos públicos}: construir un modelo de \emph{expected threat} con la grilla de cancha de Karun Singh sobre eventos StatsBomb.
+  \item \textbf{Enriquecimiento biográfico}: scraper de Transfermarkt para edad, altura, pie hábil, valor de mercado de cada jugador.
+  \item \textbf{Splits de prueba más severos}: \emph{cold start} (jugador sin historia en train), \emph{cross-league} (entrenar en Big~5 y validar en torneos internacionales).
+  \item \textbf{Embeddings de jugadores y equipos}: representaciones aprendidas que se compartan entre modelos de stats distintas.
+  \item \textbf{Calibración}: comparar la distribución de predicciones contra la realidad. Una métrica $\hat{Y}$ está bien calibrada si, al promediar sobre todas las predicciones con $\hat{Y} \approx p$, el promedio empírico de $Y$ también es $\approx p$.
+\end{enumerate}

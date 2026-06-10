@@ -1,0 +1,45 @@
+\section{Introducción}
+\label{sec:intro}
+
+\subsection{Objetivo}
+
+Este documento sirve como referencia técnica del marco conceptual detrás del proyecto \textsc{Futbolstats}. Su lectura no es necesaria para correr los scrapers, pero sí lo es para entender \emph{por qué} se eligen ciertas métricas como objetivo de modelado y \emph{qué datos} habilitan cada una.
+
+\subsection{Contexto del proyecto}
+
+El proyecto \textsc{Futbolstats} construye una base de datos estructurada de estadísticas de fútbol desde fuentes públicas (FBref, StatsBomb Open Data, Understat, ClubElo) con el objetivo de entrenar modelos predictivos de \emph{estadísticas individuales por partido}. Concretamente, se predicen variables como:
+
+\begin{itemize}[noitemsep]
+  \item tiros, tiros al arco, xG generado;
+  \item pases intentados y completados, pases clave;
+  \item entradas, intercepciones, despejes;
+  \item faltas cometidas y recibidas, tarjetas amarillas y rojas;
+  \item dribles intentados y completados.
+\end{itemize}
+
+\noindent
+El enfoque es deliberadamente distinto al de la mayoría de literatura aplicada en fútbol, que se concentra en predecir \emph{resultados} (victoria/empate/derrota) o \emph{goles totales} por partido. Predecir resultados es un problema de baja dimensionalidad y alto ruido; predecir estadísticas individuales abre un espacio mucho más rico de modelado y permite evaluar componentes específicos del juego.
+
+\subsection{Audiencia}
+
+Este texto asume:
+
+\begin{itemize}[noitemsep]
+  \item familiaridad con regresión y validación cruzada temporal;
+  \item conocimiento básico de fútbol (posiciones, fases de juego);
+  \item interés en construir features desde datos brutos, no sólo consumir métricas pre-calculadas.
+\end{itemize}
+
+\subsection{Estructura del documento}
+
+La Sección~\ref{sec:xg} introduce formalmente el concepto de \emph{Expected Goals} (xG) y explica por qué la idea se generaliza naturalmente a cualquier evento contable del juego. La Sección~\ref{sec:catalogo} presenta el catálogo de métricas \emph{expected} más utilizadas en la literatura, con definición, interpretación y observables necesarios para cada una. La Sección~\ref{sec:fuentes} cruza ese catálogo con las fuentes de datos públicas disponibles, indicando qué métrica se puede construir desde dónde y con qué cobertura. La Sección~\ref{sec:impl} describe la implementación concreta en este repositorio: scripts, schemas y flujo de procesamiento. La Sección~\ref{sec:limitaciones} discute las limitaciones del enfoque actual y posibles líneas de trabajo futuro.
+
+\subsection{Convenciones de notación}
+
+\begin{itemize}[noitemsep]
+  \item $x_i$ denota un evento individual (un tiro, un pase, una falta).
+  \item $\mathbf{c}_i$ denota el vector de contexto observado en el momento de $x_i$ (posición en cancha, parte del cuerpo, presión defensiva, etc.).
+  \item $Y_i \in \{0,1\}$ es la realización binaria del evento (gol/no gol, tarjeta/no tarjeta, etc.).
+  \item $\widehat{Y}_i = P(Y_i = 1 \mid \mathbf{c}_i)$ es la predicción del modelo, interpretada como probabilidad.
+  \item $\mathrm{x}\textsc{M}$ con \textsc{M} en versalitas refiere a la métrica \emph{expected} asociada al evento $M$ (por ejemplo $\mathrm{xG}$, $\mathrm{xA}$, $\mathrm{xCards}$).
+\end{itemize}

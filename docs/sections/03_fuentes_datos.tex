@@ -1,0 +1,120 @@
+\section{Fuentes de datos y cobertura}
+\label{sec:fuentes}
+
+Las métricas \emph{expected} sólo son construibles si la fuente expone los \emph{observables} requeridos. Esta sección caracteriza las fuentes públicas más usadas y cruza su disponibilidad contra el catálogo de la Sección~\ref{sec:catalogo}.
+
+\subsection{Fuentes públicas relevantes}
+
+\subsubsection{StatsBomb Open Data}
+
+\textbf{Forma de acceso}: archivos JSON publicados directamente en GitHub (\url{https://github.com/statsbomb/open-data}). No hay scraping de páginas web ni rate limit relevante.\\
+\textbf{Granularidad}: \emph{event-level}. Cada partido se expone como una lista de $\sim 3000$ eventos, cada uno con tipo (Pass, Shot, Foul, Carry, etc.), coordenadas $(x,y)$, tiempo y atributos específicos del tipo. Cada tiro incluye \emph{freeze-frame} con la posición de todos los jugadores en el momento.\\
+\textbf{Cobertura}: limitada a competiciones específicas que StatsBomb decide liberar. En orden de importancia ofensiva para el proyecto: FIFA World Cup 2018, 2022; UEFA Euro 2020, 2024; UEFA Women's Euro 2022, 2025; Copa América 2024; Champions League 2003/04--2018/19; Premier League 2003/04 y 2015/16; La Liga 2004/05--2020/21 (algunas restringidas a partidos de Messi); Major League Soccer 2023; Indian Super League 2021/22; FA WSL varias temporadas.\\
+\textbf{Licencia}: open con atribución requerida.
+
+\subsubsection{FBref / Sports Reference}
+
+\textbf{Forma de acceso}: scraping HTML de \url{https://fbref.com}. Sitio detrás de Cloudflare con \emph{JS challenge}, requiere navegador real (Chromium). Rate limit recomendado: 1 request cada 3 segundos.\\
+\textbf{Granularidad}: \emph{aggregate} y \emph{match summary}. No expone eventos individuales. A nivel temporada, da agregados por jugador (\texttt{standard}, \texttt{shooting}, \texttt{misc}, \texttt{playing\_time}, \texttt{keeper}). A nivel partido, da el \emph{summary} con counts agregados de tiros, tackles, intercepciones, faltas y tarjetas.\\
+\textbf{Cobertura}: amplísima --- Big~5 europeas, MLS, ligas sudamericanas, copas internacionales, históricos hasta los 90.\\
+\textbf{Fuente original}: datos licenciados de Opta/StatsPerform.
+
+\subsubsection{Understat}
+
+\textbf{Forma de acceso}: scraping HTML simple de \url{https://understat.com}; sin Cloudflare.\\
+\textbf{Granularidad}: \emph{shot-level}. Cada tiro con coordenadas y xG calculado por modelo propio. Agregables a nivel partido y temporada.\\
+\textbf{Cobertura}: Big~5 europeas + RFPL desde 2014. Cobertura continua, sin gaps.\\
+\textbf{Limitación}: foco en tiros y xG; no expone pases, dribles, faltas con detalle.
+
+\subsubsection{ClubElo}
+
+\textbf{Forma de acceso}: API simple en \url{http://clubelo.com}; CSVs y JSON.\\
+\textbf{Granularidad}: rating diario por club.\\
+\textbf{Uso}: feature de \emph{strength of opponent} en modelos jugador-partido. Disponible para todos los clubes europeos relevantes con histórico de décadas.
+
+\subsubsection{WhoScored / Sofascore}
+
+\textbf{Forma de acceso}: scraping pesado en JavaScript; soccerdata lo soporta vía Chromium.\\
+\textbf{Granularidad}: \emph{match-level} con stats granulares por jugador (incluye ratings propios).\\
+\textbf{Cobertura}: amplia.\\
+\textbf{Limitación}: scraping lento y vulnerable a cambios de la web.
+
+\subsubsection{Transfermarkt}
+
+\textbf{Forma de acceso}: scraping HTML simple, con paginación pero sin Cloudflare agresivo.\\
+\textbf{Contenido}: \emph{no} expone estadísticas de partido; sí expone metadata de jugadores (fecha de nacimiento, altura, pie hábil, valor de mercado, historial de clubes, lesiones).\\
+\textbf{Uso}: enriquecer el catálogo \texttt{players.csv}.
+
+\subsubsection{APIs comerciales}
+
+\textbf{API-Football} (RapidAPI): cobertura global, free tier 100 req/día, pago desde \$20/mes. Incluye eventos por partido (no event-level rico, sí counts).\\
+\textbf{Sportmonks}, \textbf{Sportradar}, \textbf{Opta}: comerciales, fuera de scope para uso personal.
+
+\subsection{Matriz métrica $\times$ fuente}
+
+Las celdas indican factibilidad y comentarios:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Sí}: la fuente expone los observables directamente.
+  \item \textbf{Derivable}: posible reconstruir desde los datos crudos con trabajo.
+  \item \textbf{No}: la fuente no contiene los observables suficientes.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Métrica} & \textbf{StatsBomb} & \textbf{FBref} & \textbf{Understat} & \textbf{WhoScored} \\
+\midrule
+xG por tiro                 & Sí (con freeze-frame) & No directo & Sí (propio)   & Sí \\
+xG agregada jugador-temporada & Derivable           & Sólo Big 5\,$^{*}$ & Sí       & Sí \\
+xG por jugador-partido       & Derivable             & Derivable & Derivable      & Sí \\
+xA por jugador-partido       & Derivable             & Sí parcial & Limitado      & Sí \\
+xT                           & Derivable             & No        & No             & No \\
+xCards / xFouls              & Derivable             & Counts no expected & No   & Counts \\
+xCorners                     & Derivable             & Counts (team-match) & No  & Sí \\
+xThrows / xGoalKicks         & Derivable             & No        & No             & No \\
+PPDA                         & Derivable             & No        & No             & Parcial \\
+VAEP                         & Derivable             & No        & No             & No \\
+\bottomrule
+\end{tabular}
+\caption{Matriz métrica $\times$ fuente. ``Derivable'' implica que el script de agregación es responsabilidad nuestra, no de la fuente. \\$^{*}$ FBref Big 5 \emph{Combined} omite el bloque \emph{Expected} en el HTML que scrapea soccerdata (limitación upstream).}
+\end{table}
+
+\subsection{Estrategia de cobertura del proyecto}
+
+Dado el catálogo y las fuentes, la estrategia es:
+
+\begin{enumerate}[label=\textbf{S\arabic*.}]
+  \item \textbf{StatsBomb} es la fuente primaria para todo lo \emph{expected} en las 9 competiciones cubiertas (xG, xA, xT, xFouls, xCards, xCorners, etc.). 3.1 millones de eventos en disco, casi 26 mil filas de jugador-partido agregado.
+  \item \textbf{FBref} es la fuente primaria para counts \emph{aggregate} en Big 5 a nivel temporada (5 temporadas, 17.5 mil filas jugador-temporada).
+  \item \textbf{FBref match summary} es la fuente para counts \emph{per-match} en Big 5 actual (lo que se va construyendo en la Fase A del roadmap).
+  \item \textbf{Understat} llena el gap de xG para Big 5 a nivel temporada (FBref no lo expone vía soccerdata).
+  \item \textbf{ClubElo} aporta la feature de \emph{strength of opponent} requerida para modelos de jugador-partido bien especificados.
+  \item \textbf{Transfermarkt} se considera para enriquecer \texttt{players.csv} con metadata biográfica.
+\end{enumerate}
+
+\subsection{Resumen ejecutivo: ¿de dónde sale cada métrica para este proyecto?}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Métrica objetivo} & \textbf{Fuente primaria} & \textbf{Cobertura efectiva} \\
+\midrule
+xG, npxG por tiro                 & StatsBomb         & 9 competiciones, 908 partidos \\
+xG por jugador-temporada Big 5     & Understat (planificado) & Big 5, 11 temporadas \\
+xA, xT, xPass, VAEP                & StatsBomb         & 9 competiciones \\
+xFouls / xFouls Drawn              & StatsBomb         & 9 competiciones \\
+xCards                             & StatsBomb (+ árbitro de FBref) & Limitado \\
+xCorners / xThrows / xGoalKicks    & StatsBomb         & 9 competiciones \\
+Counts tiros, tackles, etc.\ Big 5 & FBref match summary & Big 5 partidos scrapeados \\
+Counts jugador-temporada Big 5     & FBref aggregates  & Big 5, 5 temporadas \\
+Strength of opponent               & ClubElo (planificado) & Todos los equipos europeos \\
+Metadata biográfica de jugadores   & Transfermarkt (futuro) & Universal \\
+\bottomrule
+\end{tabular}
+\caption{Asignación final fuente $\to$ métrica adoptada en \textsc{Futbolstats}.}
+\end{table}

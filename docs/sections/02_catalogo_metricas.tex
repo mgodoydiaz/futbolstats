@@ -1,0 +1,128 @@
+\section{Catálogo de métricas \emph{expected}}
+\label{sec:catalogo}
+
+Esta sección enumera las métricas \emph{expected} más utilizadas en la literatura, agrupadas por dominio del juego. Para cada una se explicita su definición, los observables necesarios para calcularla y su interpretación práctica.
+
+\subsection{Métricas ofensivas}
+
+\subsubsection{xG --- Expected Goals}
+
+\textbf{Definición.} Probabilidad de gol asignada a cada tiro, calibrada empíricamente.
+\[
+  \mathrm{xG}(x_i) = P(\text{gol} \mid \mathbf{c}_i)
+\]
+\textbf{Observables.} Evento de tiro con ubicación, parte del cuerpo, tipo de jugada previa.\\
+\textbf{Interpretación.} Suma por jugador/equipo aproxima ``goles esperados''. La diferencia $G - \mathrm{xG}$ mide finalización.
+
+\subsubsection{npxG --- non-penalty xG}
+
+\textbf{Definición.} xG excluyendo los tiros desde penal.\\
+\textbf{Motivación.} Los penales tienen xG fija ($\approx 0.76$) y dependen más del designado al penal que del juego abierto. npxG aísla la contribución al juego en movimiento.
+
+\subsubsection{xA --- Expected Assists}
+
+\textbf{Definición.} Para un pase $p_i$ que termina en tiro, $\mathrm{xA}(p_i) = \mathrm{xG}(\text{tiro resultante})$. Si no hay tiro, $\mathrm{xA}(p_i) = 0$.\\
+\textbf{Observables.} Pasos completados que generan tiros (\emph{key passes}), más la xG de esos tiros.\\
+\textbf{Interpretación.} Cuantifica creación de chances. Mejor que asistencias crudas porque no penaliza al pasador cuando el rematador falla.
+
+\subsubsection{xAG --- Expected Assisted Goals}
+
+\textbf{Definición.} Variante de xA que sólo cuenta el pase inmediatamente previo a un tiro, no toda la cadena.
+
+\subsubsection{xT --- Expected Threat}
+
+\textbf{Definición.} Mapa de valor sobre la cancha que asigna a cada celda $(x,y)$ una probabilidad esperada de que la posesión termine en gol dentro de los próximos $N$ eventos. La diferencia $\Delta \mathrm{xT}$ entre origen y destino de un pase o carrera valora la jugada.\\
+\textbf{Observables.} Cadena de eventos por posesión con coordenadas.\\
+\textbf{Interpretación.} Mide ``progresión peligrosa''. Un centrocampista que avanza balón 30 metros hacia el área genera $\Delta \mathrm{xT}$ alto sin necesidad de generar tiro.
+
+\subsubsection{xPass --- Expected Pass Completion}
+
+\textbf{Definición.} Probabilidad de que un pase se complete, dada distancia, ángulo y presión.\\
+\textbf{Uso.} Ajustar el porcentaje de completitud por dificultad. Un centrocampista que completa $75\%$ de pases difíciles vale más que uno que completa $95\%$ de pases laterales triviales.
+
+\subsection{Métricas defensivas y de presión}
+
+\subsubsection{xGA --- Expected Goals Against}
+
+\textbf{Definición.} xG agregada de los tiros recibidos por un equipo. Métrica defensiva paralela a xG.
+
+\subsubsection{PPDA --- Passes per Defensive Action}
+
+\textbf{Definición.} Pases permitidos al rival en el tercio defensivo propio antes de cometer una acción defensiva (entrada, intercepción, falta).\\
+\textbf{Interpretación.} Cuantifica intensidad de presión: valores bajos indican presión alta y agresiva.
+
+\subsection{Métricas disciplinarias}
+
+\subsubsection{xFouls --- Expected Fouls Committed}
+
+\textbf{Definición.} Probabilidad de que un duelo / acción defensiva termine en falta, calibrada por contexto (zona, estilo del jugador, árbitro).\\
+\textbf{Uso.} Identificar jugadores que se exponen sistemáticamente a faltas en zonas peligrosas.
+
+\subsubsection{xFD --- Expected Fouls Drawn}
+
+\textbf{Definición.} Probabilidad de que un drible / recepción de un jugador termine en falta a favor.\\
+\textbf{Interpretación.} Habilidad para forzar faltas. Mide tanto skill (\emph{regateadores} provocan más faltas) como riesgo.
+
+\subsubsection{xCards --- Expected Cards}
+
+\textbf{Definición.} Probabilidad de que un jugador sea amonestado en un partido, dada su tasa histórica, el estilo del árbitro y el contexto del encuentro (rivalidad, importancia, marcador).\\
+\textbf{Observables.} Eventos \texttt{Foul Committed} con campo \texttt{card}, eventos \texttt{Bad Behaviour}, asignación de árbitro.\\
+\textbf{Uso típico.} Mercados de apuestas; análisis disciplinario; ajuste de modelos de minutos esperados.
+
+\subsection{Métricas de pelota detenida (\emph{set pieces})}
+
+\subsubsection{xCorners --- Expected Corners}
+
+\textbf{Definición.} Corners esperados por equipo en un partido. Función de \emph{shots blocked}, presión ofensiva y estilo defensivo del rival.\\
+\textbf{Observables.} Eventos con \texttt{pass\_type = Corner} (o equivalentes); cantidad de tiros desviados / despejados.
+
+\subsubsection{xFreeKicks --- Expected Free Kicks}
+
+\textbf{Definición.} Tiros libres esperados (sumando todas las posiciones, o restringido al último tercio).\\
+\textbf{Uso.} Modelar oportunidades de \emph{set piece} ofensiva; identificar jugadores que las generan.
+
+\subsubsection{xThrows --- Expected Throw-Ins}
+
+\textbf{Definición.} Saques de banda esperados por equipo en un partido. Mecánico pero útil como predictor de duración efectiva.\\
+\textbf{Limitación.} Métrica de bajo \emph{insight} por sí misma; su valor está en modelos de mercado especializado.
+
+\subsubsection{xGoalKicks --- Expected Goal Kicks}
+
+\textbf{Definición.} Saques de meta esperados; refleja tiros desviados y presión ofensiva sostenida.
+
+\subsection{Métricas compositas}
+
+\subsubsection{VAEP --- Valuing Actions by Estimated Probabilities}
+
+\textbf{Definición.} Framework de Decroos y otros (2019) que asigna a cada acción un valor en goles esperados: $V(a_i) = \Delta P(\text{gol propio}) - \Delta P(\text{gol rival})$, considerando los efectos a corto plazo de la acción.\\
+\textbf{Diferencia con xT.} VAEP también valora acciones defensivas (despejes, intercepciones), no sólo progresión ofensiva.
+
+\subsubsection{G+ / Goals Added}
+
+\textbf{Definición.} Métrica de la MLS análoga a VAEP. Diferencias de implementación, mismo principio.
+
+\subsection{Tabla resumen}
+
+\begin{longtable}{lp{5.5cm}p{4cm}p{2.5cm}}
+\toprule
+\textbf{Métrica} & \textbf{Mide} & \textbf{Requiere eventos de\ldots} & \textbf{Granularidad mínima} \\
+\midrule
+\endhead
+xG       & calidad de chance de un tiro             & tiros con coordenadas      & por tiro \\
+npxG     & xG sin penales                            & tiros + tipo               & por tiro \\
+xA       & creación de chance                        & pases + tiros consecutivos & por pase \\
+xT       & valor de mover el balón                   & cadena de eventos          & por evento \\
+xPass    & dificultad de un pase                     & pases con coordenadas      & por pase \\
+xGA      & calidad de chance concedida               & tiros del rival            & por tiro \\
+PPDA     & intensidad de presión                     & pases del rival + defensa  & por equipo-partido \\
+xFouls   & probabilidad de cometer falta             & faltas con contexto        & por evento \\
+xFD      & probabilidad de recibir falta             & faltas con contexto        & por evento \\
+xCards   & probabilidad de amonestación              & tarjetas + árbitro         & por jugador-partido \\
+xCorners & corners esperados                         & corners + flujo ofensivo   & por equipo-partido \\
+xFK      & tiros libres esperados                    & faltas con ubicación       & por equipo-partido \\
+xThrows  & saques de banda esperados                 & restarts                   & por equipo-partido \\
+xGK      & saques de meta esperados                  & restarts del rival         & por equipo-partido \\
+VAEP     & valor en goles esperados de una acción   & todos los eventos          & por evento \\
+\bottomrule
+\caption{Catálogo resumido. Granularidad mínima indica el nivel al que típicamente se reporta la métrica.}
+\end{longtable}

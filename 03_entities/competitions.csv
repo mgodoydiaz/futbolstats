@@ -1,0 +1,22 @@
+competition_id,name,country,tier,format,source,source_id
+fbref_9,Premier League,ENG,1,league,fbref,9
+fbref_12,La Liga,ESP,1,league,fbref,12
+fbref_11,Serie A,ITA,1,league,fbref,11
+fbref_20,Bundesliga,GER,1,league,fbref,20
+fbref_13,Ligue 1,FRA,1,league,fbref,13
+fbref_32,Primeira Liga,POR,1,league,fbref,32
+fbref_23,Eredivisie,NED,1,league,fbref,23
+fbref_37,Belgian Pro League,BEL,1,league,fbref,37
+fbref_21,Liga Profesional,ARG,1,league,fbref,21
+fbref_24,Brasileirão Série A,BRA,1,league,fbref,24
+fbref_22,MLS,USA,1,league,fbref,22
+fbref_31,Liga MX,MEX,1,league,fbref,31
+fbref_27,Süper Lig,TUR,1,league,fbref,27
+fbref_8,UEFA Champions League,INT,1,group_knockout,fbref,8
+fbref_19,UEFA Europa League,INT,2,group_knockout,fbref,19
+fbref_882,UEFA Conference League,INT,3,group_knockout,fbref,882
+fbref_14,Copa Libertadores,INT,1,group_knockout,fbref,14
+fbref_205,Copa Sudamericana,INT,2,group_knockout,fbref,205
+fbref_1,FIFA World Cup,INT,1,group_knockout,fbref,1
+fbref_685,Copa América,INT,1,group_knockout,fbref,685
+fbref_676,UEFA Euro,INT,1,group_knockout,fbref,676

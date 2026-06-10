@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue!60!black,
+  citecolor=black,
+  pdftitle={Metricas Expected en el Futbol}
+}
+
+% --- metadata ---
+\title{
+  Métricas \emph{Expected} en el Fútbol \\
+  \large Marco conceptual, fuentes de datos y construcción
+}
+\author{Proyecto \textsc{Futbolstats}}
+\date{\today}
+
+% --- document ---
+\begin{document}
+
+\maketitle
+\begin{abstract}
+\noindent
+Este documento describe el marco teórico de las métricas \emph{expected} (xG, xA, xT, xCards, xCorners, etc.), las fuentes de datos públicas que permiten construirlas y la implementación concreta de este pipeline en el proyecto \textsc{Futbolstats}. La motivación de fondo es entrenar modelos predictivos a nivel \emph{jugador-partido} sobre estadísticas individuales, no sobre resultados, y este texto formaliza qué se necesita para hacerlo bien.
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+\input{sections/00_introduccion}
+\input{sections/01_concepto_xg}
+\input{sections/02_catalogo_metricas}
+\input{sections/03_fuentes_datos}
+\input{sections/04_implementacion}
+\input{sections/05_limitaciones}
+
+\end{document}

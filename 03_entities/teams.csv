@@ -1,0 +1,278 @@
+team_id,name,name_normalized,country,founded_year,stadium,source,source_id
+sb_786,Serbia,serbia,Serbia,,,statsbomb,786
+sb_773,Switzerland,switzerland,Switzerland,,,statsbomb,773
+sb_779,Argentina,argentina,Argentina,,,statsbomb,779
+sb_792,Australia,australia,Australia,,,statsbomb,792
+sb_776,Denmark,denmark,Denmark,,,statsbomb,776
+sb_781,Brazil,brazil,Brazil,,,statsbomb,781
+sb_777,Tunisia,tunisia,Tunisia,,,statsbomb,777
+sb_3565,Ecuador,ecuador,Ecuador,,,statsbomb,3565
+sb_787,Senegal,senegal,Senegal,,,statsbomb,787
+sb_941,Netherlands,netherlands,Netherlands,,,statsbomb,941
+sb_783,Uruguay,uruguay,Uruguay,,,statsbomb,783
+sb_791,South Korea,south korea,Korea (South),,,statsbomb,791
+sb_788,Morocco,morocco,Morocco,,,statsbomb,788
+sb_780,Portugal,portugal,Portugal,,,statsbomb,780
+sb_771,France,france,France,,,statsbomb,771
+sb_799,Saudi Arabia,saudi arabia,Saudi Arabia,,,statsbomb,799
+sb_794,Mexico,mexico,Mexico,,,statsbomb,794
+sb_789,Poland,poland,Poland,,,statsbomb,789
+sb_3566,Qatar,qatar,Qatar,,,statsbomb,3566
+sb_768,England,england,England,,,statsbomb,768
+sb_785,Croatia,croatia,Croatia,,,statsbomb,785
+sb_772,Spain,spain,Spain,,,statsbomb,772
+sb_778,Japan,japan,Japan,,,statsbomb,778
+sb_1839,United States,united states,United States of America,,,statsbomb,1839
+sb_770,Germany,germany,Germany,,,statsbomb,770
+sb_2722,Cameroon,cameroon,Cameroon,,,statsbomb,2722
+sb_795,Costa Rica,costa rica,Costa Rica,,,statsbomb,795
+sb_782,Belgium,belgium,Belgium,,,statsbomb,782
+sb_907,Wales,wales,Wales,,,statsbomb,907
+sb_4885,Ghana,ghana,Ghana,,,statsbomb,4885
+sb_1833,Canada,canada,Canada,,,statsbomb,1833
+sb_797,Iran,iran,"Iran, Islamic Republic of",,,statsbomb,797
+sb_206,Deportivo Alavés,deportivo alaves,Spain,,,statsbomb,206
+sb_217,Barcelona,barcelona,Spain,,,statsbomb,217
+sb_1049,Granada,granada,Spain,,,statsbomb,1049
+sb_209,Celta Vigo,celta vigo,Spain,,,statsbomb,209
+sb_218,Real Betis,real betis,Spain,,,statsbomb,218
+sb_422,Osasuna,osasuna,Spain,,,statsbomb,422
+sb_220,Real Madrid,real madrid,Spain,,,statsbomb,220
+sb_221,Levante UD,levante ud,Spain,,,statsbomb,221
+sb_222,Villarreal,villarreal,Spain,,,statsbomb,222
+sb_902,Huesca,huesca,Spain,,,statsbomb,902
+sb_213,Sevilla,sevilla,Spain,,,statsbomb,213
+sb_216,Getafe,getafe,Spain,,,statsbomb,216
+sb_212,Atlético Madrid,atletico madrid,Spain,,,statsbomb,212
+sb_207,Valencia,valencia,Spain,,,statsbomb,207
+sb_210,Real Sociedad,real sociedad,Spain,,,statsbomb,210
+sb_901,Real Valladolid,real valladolid,Spain,,,statsbomb,901
+sb_552,Cádiz,cadiz,Spain,,,statsbomb,552
+sb_215,Athletic Club,athletic club,Spain,,,statsbomb,215
+sb_1042,Elche,elche,Spain,,,statsbomb,1042
+sb_22,Leicester City,leicester city,England,,,statsbomb,22
+sb_28,AFC Bournemouth,bournemouth,England,,,statsbomb,28
+sb_27,West Bromwich Albion,west bromwich albion,England,,,statsbomb,27
+sb_41,Sunderland,sunderland,England,,,statsbomb,41
+sb_37,Newcastle United,newcastle united,England,,,statsbomb,37
+sb_59,Aston Villa,aston villa,England,,,statsbomb,59
+sb_29,Everton,everton,England,,,statsbomb,29
+sb_31,Crystal Palace,crystal palace,England,,,statsbomb,31
+sb_23,Watford,watford,England,,,statsbomb,23
+sb_1,Arsenal,arsenal,England,,,statsbomb,1
+sb_24,Liverpool,liverpool,England,,,statsbomb,24
+sb_38,Tottenham Hotspur,tottenham hotspur,England,,,statsbomb,38
+sb_36,Manchester City,manchester city,England,,,statsbomb,36
+sb_56,Norwich City,norwich city,England,,,statsbomb,56
+sb_33,Chelsea,chelsea,England,,,statsbomb,33
+sb_30,Stoke City,stoke city,England,,,statsbomb,30
+sb_39,Manchester United,manchester united,England,,,statsbomb,39
+sb_40,West Ham United,west ham united,England,,,statsbomb,40
+sb_26,Swansea City,swansea city,Wales,,,statsbomb,26
+sb_25,Southampton,southampton,England,,,statsbomb,25
+sb_909,Turkey,turkey,Turkey,,,statsbomb,909
+sb_915,Austria,austria,Austria,,,statsbomb,915
+sb_911,Ukraine,ukraine,Ukraine,,,statsbomb,911
+sb_912,Czech Republic,czech republic,Czech Republic,,,statsbomb,912
+sb_905,Romania,romania,Romania,,,statsbomb,905
+sb_944,Slovenia,slovenia,Slovenia,,,statsbomb,944
+sb_2138,Georgia,georgia,Georgia,,,statsbomb,2138
+sb_908,Slovakia,slovakia,Slovakia,,,statsbomb,908
+sb_906,Albania,albania,Albania,,,statsbomb,906
+sb_914,Italy,italy,Italy,,,statsbomb,914
+sb_942,Scotland,scotland,Scotland,,,statsbomb,942
+sb_916,Hungary,hungary,Hungary,,,statsbomb,916
+fbref_arsenal,Arsenal,arsenal,ENG,,,fbref,arsenal
+fbref_aston-villa,Aston Villa,aston villa,ENG,,,fbref,aston-villa
+fbref_brighton,Brighton,brighton,ENG,,,fbref,brighton
+fbref_burnley,Burnley,burnley,ENG,,,fbref,burnley
+fbref_chelsea,Chelsea,chelsea,ENG,,,fbref,chelsea
+fbref_crystal-palace,Crystal Palace,crystal palace,ENG,,,fbref,crystal-palace
+fbref_everton,Everton,everton,ENG,,,fbref,everton
+fbref_fulham,Fulham,fulham,ENG,,,fbref,fulham
+fbref_leeds-united,Leeds United,leeds united,ENG,,,fbref,leeds-united
+fbref_leicester-city,Leicester City,leicester city,ENG,,,fbref,leicester-city
+fbref_liverpool,Liverpool,liverpool,ENG,,,fbref,liverpool
+fbref_manchester-city,Manchester City,manchester city,ENG,,,fbref,manchester-city
+fbref_manchester-utd,Manchester Utd,manchester utd,ENG,,,fbref,manchester-utd
+fbref_newcastle-united,Newcastle United,newcastle united,ENG,,,fbref,newcastle-united
+fbref_sheffield-united,Sheffield United,sheffield united,ENG,,,fbref,sheffield-united
+fbref_southampton,Southampton,southampton,ENG,,,fbref,southampton
+fbref_tottenham-hotspur,Tottenham Hotspur,tottenham hotspur,ENG,,,fbref,tottenham-hotspur
+fbref_west-brom,West Brom,west brom,ENG,,,fbref,west-brom
+fbref_west-ham-united,West Ham United,west ham united,ENG,,,fbref,west-ham-united
+fbref_wolves,Wolves,wolves,ENG,,,fbref,wolves
+fbref_alaves,Alavés,alaves,ESP,,,fbref,alaves
+fbref_athletic-club,Athletic Club,athletic club,ESP,,,fbref,athletic-club
+fbref_atletico-madrid,Atlético Madrid,atletico madrid,ESP,,,fbref,atletico-madrid
+fbref_barcelona,Barcelona,barcelona,ESP,,,fbref,barcelona
+fbref_celta-vigo,Celta Vigo,celta vigo,ESP,,,fbref,celta-vigo
+fbref_cadiz,Cádiz,cadiz,ESP,,,fbref,cadiz
+fbref_eibar,Eibar,eibar,ESP,,,fbref,eibar
+fbref_elche,Elche,elche,ESP,,,fbref,elche
+fbref_getafe,Getafe,getafe,ESP,,,fbref,getafe
+fbref_granada,Granada,granada,ESP,,,fbref,granada
+fbref_huesca,Huesca,huesca,ESP,,,fbref,huesca
+fbref_levante,Levante,levante,ESP,,,fbref,levante
+fbref_osasuna,Osasuna,osasuna,ESP,,,fbref,osasuna
+fbref_real-betis,Real Betis,real betis,ESP,,,fbref,real-betis
+fbref_real-madrid,Real Madrid,real madrid,ESP,,,fbref,real-madrid
+fbref_real-sociedad,Real Sociedad,real sociedad,ESP,,,fbref,real-sociedad
+fbref_sevilla,Sevilla,sevilla,ESP,,,fbref,sevilla
+fbref_valencia,Valencia,valencia,ESP,,,fbref,valencia
+fbref_valladolid,Valladolid,valladolid,ESP,,,fbref,valladolid
+fbref_villarreal,Villarreal,villarreal,ESP,,,fbref,villarreal
+fbref_angers,Angers,angers,FRA,,,fbref,angers
+fbref_bordeaux,Bordeaux,bordeaux,FRA,,,fbref,bordeaux
+fbref_brest,Brest,brest,FRA,,,fbref,brest
+fbref_dijon,Dijon,dijon,FRA,,,fbref,dijon
+fbref_lens,Lens,lens,FRA,,,fbref,lens
+fbref_lille,Lille,lille,FRA,,,fbref,lille
+fbref_lorient,Lorient,lorient,FRA,,,fbref,lorient
+fbref_lyon,Lyon,lyon,FRA,,,fbref,lyon
+fbref_marseille,Marseille,marseille,FRA,,,fbref,marseille
+fbref_metz,Metz,metz,FRA,,,fbref,metz
+fbref_monaco,Monaco,monaco,FRA,,,fbref,monaco
+fbref_montpellier,Montpellier,montpellier,FRA,,,fbref,montpellier
+fbref_nantes,Nantes,nantes,FRA,,,fbref,nantes
+fbref_nice,Nice,nice,FRA,,,fbref,nice
+fbref_nimes,Nîmes,nimes,FRA,,,fbref,nimes
+fbref_paris-saint-germain,Paris Saint-Germain,paris saint-germain,FRA,,,fbref,paris-saint-germain
+fbref_reims,Reims,reims,FRA,,,fbref,reims
+fbref_rennes,Rennes,rennes,FRA,,,fbref,rennes
+fbref_saint-etienne,Saint-Étienne,saint-etienne,FRA,,,fbref,saint-etienne
+fbref_strasbourg,Strasbourg,strasbourg,FRA,,,fbref,strasbourg
+fbref_atalanta,Atalanta,atalanta,ITA,,,fbref,atalanta
+fbref_benevento,Benevento,benevento,ITA,,,fbref,benevento
+fbref_bologna,Bologna,bologna,ITA,,,fbref,bologna
+fbref_cagliari,Cagliari,cagliari,ITA,,,fbref,cagliari
+fbref_crotone,Crotone,crotone,ITA,,,fbref,crotone
+fbref_fiorentina,Fiorentina,fiorentina,ITA,,,fbref,fiorentina
+fbref_genoa,Genoa,genoa,ITA,,,fbref,genoa
+fbref_hellas-verona,Hellas Verona,hellas verona,ITA,,,fbref,hellas-verona
+fbref_inter,Inter,inter,ITA,,,fbref,inter
+fbref_juventus,Juventus,juventus,ITA,,,fbref,juventus
+fbref_lazio,Lazio,lazio,ITA,,,fbref,lazio
+fbref_milan,Milan,milan,ITA,,,fbref,milan
+fbref_napoli,Napoli,napoli,ITA,,,fbref,napoli
+fbref_parma,Parma,parma,ITA,,,fbref,parma
+fbref_roma,Roma,roma,ITA,,,fbref,roma
+fbref_sampdoria,Sampdoria,sampdoria,ITA,,,fbref,sampdoria
+fbref_sassuolo,Sassuolo,sassuolo,ITA,,,fbref,sassuolo
+fbref_spezia,Spezia,spezia,ITA,,,fbref,spezia
+fbref_torino,Torino,torino,ITA,,,fbref,torino
+fbref_udinese,Udinese,udinese,ITA,,,fbref,udinese
+fbref_arminia,Arminia,arminia,,,,fbref,arminia
+fbref_augsburg,Augsburg,augsburg,,,,fbref,augsburg
+fbref_bayern-munich,Bayern Munich,bayern munich,,,,fbref,bayern-munich
+fbref_dortmund,Dortmund,dortmund,,,,fbref,dortmund
+fbref_eintracht-frankfurt,Eintracht Frankfurt,eintracht frankfurt,,,,fbref,eintracht-frankfurt
+fbref_freiburg,Freiburg,freiburg,,,,fbref,freiburg
+fbref_gladbach,Gladbach,gladbach,,,,fbref,gladbach
+fbref_hertha-bsc,Hertha BSC,hertha bsc,,,,fbref,hertha-bsc
+fbref_hoffenheim,Hoffenheim,hoffenheim,,,,fbref,hoffenheim
+fbref_koln,Köln,koln,,,,fbref,koln
+fbref_leverkusen,Leverkusen,leverkusen,,,,fbref,leverkusen
+fbref_mainz-05,Mainz 05,mainz 05,,,,fbref,mainz-05
+fbref_rb-leipzig,RB Leipzig,rb leipzig,,,,fbref,rb-leipzig
+fbref_schalke-04,Schalke 04,schalke 04,,,,fbref,schalke-04
+fbref_stuttgart,Stuttgart,stuttgart,,,,fbref,stuttgart
+fbref_union-berlin,Union Berlin,union berlin,,,,fbref,union-berlin
+fbref_werder-bremen,Werder Bremen,werder bremen,,,,fbref,werder-bremen
+fbref_wolfsburg,Wolfsburg,wolfsburg,,,,fbref,wolfsburg
+fbref_brentford,Brentford,brentford,ENG,,,fbref,brentford
+fbref_norwich-city,Norwich City,norwich city,ENG,,,fbref,norwich-city
+fbref_watford,Watford,watford,ENG,,,fbref,watford
+fbref_espanyol,Espanyol,espanyol,ESP,,,fbref,espanyol
+fbref_mallorca,Mallorca,mallorca,ESP,,,fbref,mallorca
+fbref_rayo-vallecano,Rayo Vallecano,rayo vallecano,ESP,,,fbref,rayo-vallecano
+fbref_clermont-foot,Clermont Foot,clermont foot,FRA,,,fbref,clermont-foot
+fbref_troyes,Troyes,troyes,FRA,,,fbref,troyes
+fbref_empoli,Empoli,empoli,ITA,,,fbref,empoli
+fbref_salernitana,Salernitana,salernitana,ITA,,,fbref,salernitana
+fbref_venezia,Venezia,venezia,ITA,,,fbref,venezia
+fbref_bochum,Bochum,bochum,,,,fbref,bochum
+fbref_greuther-furth,Greuther Fürth,greuther furth,,,,fbref,greuther-furth
+fbref_bournemouth,Bournemouth,bournemouth,ENG,,,fbref,bournemouth
+fbref_nottingham-forest,Nottingham Forest,nottingham forest,ENG,,,fbref,nottingham-forest
+fbref_almeria,Almería,almeria,ESP,,,fbref,almeria
+fbref_girona,Girona,girona,ESP,,,fbref,girona
+fbref_ajaccio,Ajaccio,ajaccio,FRA,,,fbref,ajaccio
+fbref_auxerre,Auxerre,auxerre,FRA,,,fbref,auxerre
+fbref_toulouse,Toulouse,toulouse,FRA,,,fbref,toulouse
+fbref_cremonese,Cremonese,cremonese,ITA,,,fbref,cremonese
+fbref_lecce,Lecce,lecce,ITA,,,fbref,lecce
+fbref_monza,Monza,monza,ITA,,,fbref,monza
+fbref_luton-town,Luton Town,luton town,ENG,,,fbref,luton-town
+fbref_las-palmas,Las Palmas,las palmas,ESP,,,fbref,las-palmas
+fbref_le-havre,Le Havre,le havre,FRA,,,fbref,le-havre
+fbref_frosinone,Frosinone,frosinone,ITA,,,fbref,frosinone
+fbref_darmstadt-98,Darmstadt 98,darmstadt 98,,,,fbref,darmstadt-98
+fbref_heidenheim,Heidenheim,heidenheim,,,,fbref,heidenheim
+fbref_ipswich-town,Ipswich Town,ipswich town,ENG,,,fbref,ipswich-town
+fbref_leganes,Leganés,leganes,ESP,,,fbref,leganes
+fbref_como,Como,como,ITA,,,fbref,como
+fbref_holstein-kiel,Holstein Kiel,holstein kiel,,,,fbref,holstein-kiel
+fbref_st-pauli,St Pauli,st pauli,,,,fbref,st-pauli
+sb_769,Colombia,colombia,Colombia,,,statsbomb,769
+sb_798,Panama,panama,Panama,,,statsbomb,798
+sb_784,Peru,peru,Peru,,,statsbomb,784
+sb_3563,Venezuela,venezuela,Venezuela (Bolivarian Republic),,,statsbomb,3563
+sb_3562,Chile,chile,Chile,,,statsbomb,3562
+sb_3567,Paraguay,paraguay,Paraguay,,,statsbomb,3567
+sb_3564,Bolivia,bolivia,Bolivia,,,statsbomb,3564
+sb_2305,Jamaica,jamaica,Jamaica,,,statsbomb,2305
+sb_790,Sweden,sweden,Sweden,,,statsbomb,790
+sb_774,Egypt,egypt,Egypt,,,statsbomb,774
+sb_775,Nigeria,nigeria,Nigeria,,,statsbomb,775
+sb_793,Iceland,iceland,Iceland,,,statsbomb,793
+sb_796,Russia,russia,Russia,,,statsbomb,796
+sb_7289,Hyderabad,hyderabad,India,,,statsbomb,7289
+sb_7283,Kerala Blasters,kerala blasters,India,,,statsbomb,7283
+sb_2021,Jamshedpur,jamshedpur,India,,,statsbomb,2021
+sb_7282,ATK Mohun Bagan,atk mohun bagan,India,,,statsbomb,7282
+sb_7286,East Bengal,east bengal,India,,,statsbomb,7286
+sb_7284,Bengaluru,bengaluru,India,,,statsbomb,7284
+sb_7288,Goa,goa,India,,,statsbomb,7288
+sb_7291,Odisha,odisha,India,,,statsbomb,7291
+sb_7287,Mumbai City,mumbai city,India,,,statsbomb,7287
+sb_7290,Chennaiyin,chennaiyin,India,,,statsbomb,7290
+sb_7285,NorthEast United,northeast united,India,,,statsbomb,7285
+sb_2358,North Macedonia,north macedonia,"Macedonia, Republic of",,,statsbomb,2358
+sb_1835,Finland,finland,Finland,,,statsbomb,1835
+sb_857,Germany Women's,germany women s,Germany,,,statsbomb,857
+sb_863,Spain Women's,spain women s,Spain,,,statsbomb,863
+sb_1214,United States Women's,united states women s,United States of America,,,statsbomb,1214
+sb_1107,Thailand Women's,thailand women s,Thailand,,,statsbomb,1107
+sb_1209,Chile Women's,chile women s,Chile,,,statsbomb,1209
+sb_858,Sweden Women's,sweden women s,Sweden,,,statsbomb,858
+sb_1210,Japan Women's,japan women s,Japan,,,statsbomb,1210
+sb_866,Scotland Women's,scotland women s,Scotland,,,statsbomb,866
+sb_851,Netherlands Women's,netherlands women s,Netherlands,,,statsbomb,851
+sb_1208,Cameroon Women's,cameroon women s,Cameroon,,,statsbomb,1208
+sb_852,Norway Women's,norway women s,Norway,,,statsbomb,852
+sb_1205,Australia Women's,australia women s,Australia,,,statsbomb,1205
+sb_855,Italy Women's,italy women s,Italy,,,statsbomb,855
+sb_1212,Jamaica Women's,jamaica women s,Jamaica,,,statsbomb,1212
+sb_1204,Argentina Women's,argentina women s,Argentina,,,statsbomb,1204
+sb_1213,Nigeria Women's,nigeria women s,Nigeria,,,statsbomb,1213
+sb_1211,Korea Republic Women's,korea republic women s,Korea (South),,,statsbomb,1211
+sb_1216,South Africa Women's,south africa women s,South Africa,,,statsbomb,1216
+sb_1207,China PR Women's,china pr women s,China,,,statsbomb,1207
+sb_1206,Canada Women's,canada women s,Canada,,,statsbomb,1206
+sb_1215,New Zealand Women's,new zealand women s,New Zealand,,,statsbomb,1215
+sb_865,England Women's,england women s,England,,,statsbomb,865
+sb_861,France Women's,france women s,France,,,statsbomb,861
+sb_1203,Brazil Women's,brazil women s,Brazil,,,statsbomb,1203
+sb_6045,Zambia Women's,zambia women s,Zambia,,,statsbomb,6045
+sb_16803,Panama Women's,panama women s,Panama,,,statsbomb,16803
+sb_864,Portugal Women's,portugal women s,Portugal,,,statsbomb,864
+sb_16802,Colombia Women's,colombia women s,Colombia,,,statsbomb,16802
+sb_2391,Morocco Women's,morocco women s,Morocco,,,statsbomb,2391
+sb_853,Denmark Women's,denmark women s,Denmark,,,statsbomb,853
+sb_860,Switzerland Women's,switzerland women s,Switzerland,,,statsbomb,860
+sb_1832,Costa Rica Women's,costa rica women s,Costa Rica,,,statsbomb,1832
+sb_2355,Haiti Women's,haiti women s,Haiti,,,statsbomb,2355
+sb_16769,Vietnam Women's,vietnam women s,Vietnam,,,statsbomb,16769
+sb_16768,Republic of Ireland Women's,republic of ireland women s,Ireland,,,statsbomb,16768
+sb_1106,Philippines Women's,philippines women s,Philippines,,,statsbomb,1106

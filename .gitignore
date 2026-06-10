@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Data caches (regenerable, can be large)
+01_data_raw/_cache/
+
+# Raw StatsBomb event parquets (~206 MB, regenerable via
+# 06_ingestion/statsbomb_loader.py from free open data; the 86 MB PL file is
+# near GitHub's 100 MB per-file hard limit). The derived training tables in
+# 02_data_processed/ ARE versioned — re-download raw events only if you need
+# event-level granularity.
+01_data_raw/events/
+
+# Driver lock artifact
+downloaded_files/driver_fixing.lock
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
