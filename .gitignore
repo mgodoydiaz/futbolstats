@@ -28,6 +28,10 @@ downloaded_files/driver_fixing.lock
 02_data_processed/matches_view/match_odds.parquet
 02_data_processed/matches_view/match_value.parquet
 
+# Scraped live odds snapshots — volatile, dated, accumulate one file per run.
+# Regenerate with 06_ingestion/pinnacle_scraper.py.
+01_data_raw/odds/
+
 # OS
 .DS_Store
 Thumbs.db
