@@ -63,7 +63,13 @@ MARKETS: dict[str, dict] = {
     "interceptions":    {"col": "interceptions",    "lines": [0.5, 1.5]},
     "fouls_committed":  {"col": "fouls_committed",  "lines": [0.5, 1.5]},
     "passes_completed": {"col": "passes_completed", "lines": [19.5, 29.5, 39.5]},
+    # Mercados que Pinnacle SÍ cotiza en fútbol (over 0.5 = "anytime"):
+    "goals":            {"col": "goals",            "lines": [0.5]},
+    "cards":            {"col": "cards",            "lines": [0.5]},
 }
+
+DISC_PATH = (PROJECT_ROOT / "02_data_processed" / "events_clean"
+             / "statsbomb_player_match_discipline.parquet")
 
 SIDES = ("over", "under")
 
@@ -303,6 +309,30 @@ def build_match_value(
 
 
 # --------------------------------------------------------------------------
+# cards: merge yellow_total (discipline table usa ids numéricos crudos)
+# --------------------------------------------------------------------------
+
+def _attach_cards(pm: pd.DataFrame) -> pd.DataFrame:
+    """Agrega columna ``cards`` (= yellow_total) si la tabla discipline existe."""
+    if "cards" in pm.columns:
+        return pm
+    if not DISC_PATH.exists() or "player_id_sb" not in pm.columns:
+        pm = pm.copy()
+        pm["cards"] = 0
+        return pm
+    disc = read_parquet(DISC_PATH)[["player_id", "match_id", "yellow_total"]].copy()
+    disc = disc.rename(columns={"player_id": "pid_num", "match_id": "mid_num"})
+    disc["pid_num"] = disc["pid_num"].astype("float64")
+    disc["mid_num"] = disc["mid_num"].astype("float64")
+    pm = pm.copy()
+    pm["pid_num"] = pm["player_id_sb"].astype("float64")
+    pm["mid_num"] = pm["match_id"].str.replace("sb_", "", regex=False).astype("float64")
+    pm = pm.merge(disc, on=["pid_num", "mid_num"], how="left")
+    pm["cards"] = pm["yellow_total"].fillna(0)
+    return pm.drop(columns=["pid_num", "mid_num", "yellow_total"])
+
+
+# --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
 
@@ -322,6 +352,8 @@ def main():
     src = SOURCES[args.source]
     pm = read_parquet(src)
     print(f"Loaded {len(pm):,} player-match rows from {src.name}")
+
+    pm = _attach_cards(pm)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 

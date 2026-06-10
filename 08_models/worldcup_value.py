@@ -193,8 +193,9 @@ def write_report(board: pd.DataFrame, args, out_md: Path) -> None:
 
 def main():
     p = argparse.ArgumentParser(description="Value board del Mundial 2026 (Pinnacle vs modelo).")
-    p.add_argument("--goal-method", default="shrinkage",
-                   help="Método para goles (rate|per90|shrinkage|xg_shrinkage).")
+    p.add_argument("--goal-method", default="xg_shrinkage",
+                   help="Método para goles (rate|per90|shrinkage|xg_shrinkage). "
+                        "Default xg_shrinkage: el mejor calibrado en backtest_scoring.py.")
     p.add_argument("--card-method", default="shrinkage",
                    help="Método para tarjetas (rate|per90|shrinkage).")
     p.add_argument("--prior-strength", type=float, default=4.0,
