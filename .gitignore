@@ -32,9 +32,10 @@ downloaded_files/driver_fixing.lock
 # Regenerate with 06_ingestion/pinnacle_scraper.py.
 01_data_raw/odds/
 
-# World Cup value boards — dated, derived from volatile odds. Regenerate with
-# 08_models/worldcup_value.py.
+# World Cup value boards + dashboard — derived from volatile odds. Regenerate
+# with 08_models/worldcup_value.py + 10_serving/build_dashboard.py.
 10_serving/worldcup/value_board_*
+10_serving/worldcup/dashboard.html
 
 # OS
 .DS_Store

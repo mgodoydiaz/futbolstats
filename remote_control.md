@@ -5,6 +5,45 @@ Entrada más reciente arriba.
 
 ---
 
+## Sesión 2026-06-10 (cont.) — Modelo de goleo y predicciones del Mundial 2026
+
+**Pedido:** modelo de goleo/tarjetas decente que sirva para backtest y Mundial,
+con el **método seleccionable por parámetro** en las funciones Python, y
+**documentación atractiva** para el usuario.
+
+**Contexto descubierto (dos universos):**
+- El **modelo** tiene historial de 7 competiciones StatsBomb (WC 18/22, Euro 20/24,
+  Copa América 24, PL 15-16, La Liga 20-21, ISL, Women's WC) — 26,295 jugador-partidos.
+- **Pinnacle** cotiza el Mundial 2026 (2,300 cuotas) pero sólo goles y tarjetas.
+- Intersección: **239 jugadores** cotizados Y con historial → analizables.
+- Backtest con odds reales de player props es inviable (no existe archivo histórico
+  de cuotas de goleador); el Mundial sí es real y factible ahora.
+
+### Entregables
+| Archivo | Qué hace |
+|---------|----------|
+| [`lib/scoring.py`](lib/scoring.py) | Estimador de tasa por jugador, **método seleccionable** (rate/per90/shrinkage/xg_shrinkage). Shrinkage Gamma-Poisson hacia media de posición. |
+| [`08_models/worldcup_value.py`](08_models/worldcup_value.py) | Value board: cuotas reales Pinnacle vs modelo → EV/Kelly. |
+| [`08_models/backtest_scoring.py`](08_models/backtest_scoring.py) | Backtest leak-safe del goleo. **xg_shrinkage gana** (cal-MAE 0.035 vs 0.211 del crudo). |
+| [`07_features/build_matches_view.py`](07_features/build_matches_view.py) | +mercados `goals` y `cards` en la vista. |
+| [`10_serving/build_dashboard.py`](10_serving/build_dashboard.py) | Dashboard HTML autocontenido del value board. |
+| [`10_serving/worldcup/README.md`](10_serving/worldcup/README.md) | Guía del flujo del Mundial. |
+
+### Hallazgos
+1. **xg_shrinkage es el mejor método** (validado por calibración leak-safe). Es el
+   default del value board.
+2. El value alto suele venir de **defensores con poca muestra** (creerle a Pinnacle,
+   no al modelo). Los picks creíbles son de muestra grande (Modrić 23 PJ, Mané 40 PJ).
+   El filtro `--min-matches` los separa.
+
+### Pendientes
+- Wiring de odds reales → recálculo de `match_value` (hoy el value board del Mundial
+  es un flujo aparte; la vista usa odds sintéticas).
+- Modelo de minutos esperados (hoy se usa el promedio histórico del jugador).
+- Ajuste por rival para selecciones (ClubElo es de clubes, no mapea directo).
+
+---
+
 ## Sesión 2026-06-10 — Pipeline de value betting (player props)
 
 **Pedido del usuario:** revisar el proyecto, crear documentación para usar Jupyter
