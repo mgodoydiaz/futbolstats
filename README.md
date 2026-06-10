@@ -56,6 +56,33 @@ python 06_ingestion\fbref_scraper.py --comp Big5 --stat standard --season 2024-2
 python 06_ingestion\fbref_scraper.py --comp Big5 --all-stats --season 2024-2025
 ```
 
+## Pipeline de apuestas (player props)
+
+Capa que conecta las predicciones con las cuotas para detectar apuestas de valor
+esperado positivo. Convierte **predicción → probabilidad → EV vs cuota → Kelly**.
+
+```powershell
+# 1. construir la vista de partidos (fixtures, predicciones, EV) con odds sintéticas
+python 07_features\build_matches_view.py --source statsbomb --synthetic
+
+# 2. backtest de la lógica (ROI por threshold, calibración, drawdown)
+python 08_models\backtest_betting.py
+
+# 3. analizar interactivo
+jupyter lab 09_correlations\notebooks\01_match_betting.ipynb
+
+# 4. cuotas reales de Pinnacle (fútbol: sólo goles y tarjetas)
+python 06_ingestion\pinnacle_scraper.py --list-leagues
+```
+
+Piezas: [`lib/betting.py`](lib/betting.py) (odds, vig, Poisson/NegBin O/U, EV, Kelly +
+tests), [`lib/backtest.py`](lib/backtest.py), [`07_features/build_matches_view.py`](07_features/build_matches_view.py),
+[`06_ingestion/pinnacle_scraper.py`](06_ingestion/pinnacle_scraper.py). Guía completa en
+[`09_correlations/notebooks/README.md`](09_correlations/notebooks/README.md).
+
+> ⚠️ Análisis estadístico personal, no asesoría de apuestas. El backtest sintético
+> valida la *lógica*, no promete edge real. Apostar arriesga pérdida total.
+
 ## Stack
 
 - **`soccerdata`** para FBref (Cloudflare JS challenge → SeleniumBase + Chrome headless).

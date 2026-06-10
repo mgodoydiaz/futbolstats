@@ -1,0 +1,107 @@
+\section{Pipeline de \emph{value betting}}
+\label{sec:betting}
+
+Esta sección documenta la capa que conecta las predicciones de estadísticas
+individuales con las cuotas de las casas de apuestas, para detectar apuestas de
+valor esperado positivo (\emph{+EV}) sobre \emph{player props}.
+
+\subsection{De la predicción a la decisión}
+
+El flujo convierte una predicción del modelo en una decisión de apuesta en cuatro
+pasos:
+
+\[
+\underbrace{\lambda}_{\text{predicción}}
+\;\longrightarrow\;
+\underbrace{P(Y \gtrless \ell)}_{\text{prob.\ over/under}}
+\;\longrightarrow\;
+\underbrace{\mathrm{EV} = p\cdot d - 1}_{\text{valor esperado}}
+\;\longrightarrow\;
+\underbrace{f^\star = \tfrac{p\,b - q}{b}}_{\text{Kelly}}
+\]
+
+donde $\lambda$ es la media predicha del conteo (tiros, tarjetas, etc.), $\ell$ la
+línea de la casa, $d$ la cuota decimal, $b = d-1$ las cuotas netas, $p$ la
+probabilidad del modelo y $q = 1-p$.
+
+\subsection{Modelos de conteo para over/under}
+
+Una apuesta \emph{over/under} sobre una estadística de conteo requiere
+$P(Y > \ell)$ y $P(Y < \ell)$. Modelamos $Y$ como variable de conteo:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Poisson}$(\lambda)$: supone $\mathrm{Var}(Y) = \mathbb{E}(Y) = \lambda$.
+  \item \textbf{Binomial Negativa} con media $\mu$ y dispersión $\alpha$, tal que
+  $\mathrm{Var}(Y) = \mu + \alpha\mu^2$. Se reduce a Poisson cuando $\alpha \to 0$.
+  Conversión a la parametrización $(n,p)$ de \texttt{scipy}: $n = 1/\alpha$,
+  $p = 1/(1+\alpha\mu)$.
+\end{itemize}
+
+Las estadísticas reales de fútbol (tiros, tackles, tarjetas) están casi siempre
+\emph{sobre-dispersas} ($\mathrm{Var} > \text{media}$), por lo que la Binomial
+Negativa es el modelo honesto. El parámetro $\alpha$ se estima por momentos:
+$\hat{\alpha} = (\mathrm{Var} - \text{media}) / \text{media}^2$. Para líneas
+semienteras (p.\,ej.\ $\ell = 2.5$) no hay empate; para líneas enteras
+($\ell = 2$) el resultado exacto produce un \emph{push} (devolución del stake).
+
+\subsection{Eliminación del \emph{vig}}
+
+La probabilidad implícita de una cuota, $1/d$, incluye el margen de la casa: la
+suma sobre los resultados de un mercado (\emph{booksum}) excede 1 por el
+\emph{overround}. Para comparar contra el modelo se devig\'ua. El método
+proporcional divide cada implícita por el \emph{booksum}; el método de potencia
+resuelve el exponente $k$ tal que $\sum_i p_i^{\,k} = 1$, reduciendo el sesgo
+favorito--\emph{longshot}. Ambos en \texttt{lib.betting.remove\_vig}.
+
+\subsection{Dimensionamiento por Kelly}
+
+El criterio de Kelly maximiza el crecimiento logarítmico del bankroll apostando
+una fracción $f^\star = (p\,b - q)/b$. En la práctica se usa \emph{Kelly
+fraccional} (un cuarto, $f = 0.25\,f^\star$) porque Kelly completo asume $p$
+conocido con certeza; con $p$ estimado, el Kelly completo produce \emph{drawdowns}
+brutales. La incertidumbre sobre la calibración del modelo justifica el
+descuento.
+
+\subsection{Reorganización de la base de datos}
+
+La tabla de entrenamiento (\texttt{02\_data\_processed/events\_clean/}) es plana,
+una fila por jugador-partido. El análisis de apuestas necesita otra forma,
+centrada en \emph{partidos $\to$ jugadores $\to$ mercados $\to$ cuotas $\to$
+valor}. El script \texttt{07\_features/build\_matches\_view.py} construye esa vista
+en \texttt{02\_data\_processed/matches\_view/}:
+
+\begin{itemize}[noitemsep]
+  \item \texttt{fixtures.parquet}: un partido por fila (fecha, liga, local/visitante, estado).
+  \item \texttt{match\_players.parquet}: por (partido, jugador), predicción
+  $\lambda$ \emph{leak-safe} y resultado realizado de cada mercado.
+  \item \texttt{match\_odds.parquet}: cuotas en formato largo (lo llena el scraper).
+  \item \texttt{match\_value.parquet}: el \emph{join} con \texttt{p\_model},
+  \texttt{implied\_prob}, \texttt{edge}, \texttt{ev}, \texttt{kelly} y el resultado
+  para backtesting.
+\end{itemize}
+
+La predicción $\lambda$ por defecto es el baseline \emph{leak-safe}
+(media móvil de 5 partidos con \texttt{shift(1)}); se sustituye por predicciones de
+XGBoost sobre-escribiendo las columnas \texttt{lam\_<market>}.
+
+\subsection{Fuente de cuotas: Pinnacle}
+
+\texttt{06\_ingestion/pinnacle\_scraper.py} consume la API guest JSON de Pinnacle
+(\texttt{guest.api.arcadia.pinnacle.com}), sin Selenium ni Cloudflare. Se eligió
+Pinnacle por su bajo margen, límites altos y por no vetar ganadores, lo que la
+hace el mejor \emph{benchmark} de probabilidad de mercado. Limitación importante:
+para fútbol Pinnacle sólo cotiza \textbf{props de goles y tarjetas} (anytime/first
+goalscorer, \emph{to score}, \emph{to be booked}); no ofrece over/under de
+tiros/tackles/pases. El edge sobre esos mercados requiere un book que los cotice
+(p.\,ej.\ Bet365).
+
+\subsection{Validación y \emph{backtest}}
+
+\texttt{lib.backtest} y \texttt{08\_models/backtest\_betting.py} simulan la
+estrategia: PnL por unidad $= (d-1)$ si gana, $-1$ si pierde, $0$ en \emph{push}.
+Se evalúa el ROI según el umbral de EV, con stake plano y Kelly fraccional. La
+\textbf{calibración} —¿cuando el modelo dice $p=0.6$ acierta el 60\,\%?— es el
+guardarraíl: si no calibra, el EV miente. El \emph{backtest} de validación corre
+sobre un mercado sintético cotizado por posición; su ROI positivo verifica que la
+\emph{lógica} funciona, pero \textbf{no es una afirmación de edge real}: contra un
+book sharp el EV esperado es $\approx -\text{vig}$.
