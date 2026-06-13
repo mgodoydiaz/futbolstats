@@ -1,0 +1,190 @@
+{
+  "partido": "Catar vs Suiza",
+  "competicion": "Copa del Mundo FIFA",
+  "fecha": "Sábado, 13 Junio 2026",
+  "hora": "15:00",
+  "fuente": "lat.betano.com",
+  "mercados": {
+    "resultado_partido_supercuotas": {
+      "nombre": "Resultado del partido SuperCuotas",
+      "tipo": "1X2",
+      "cuotas": [
+        { "seleccion": "1 (Catar)", "cuota": 13.50 },
+        { "seleccion": "X (Empate)", "cuota": 6.40 },
+        { "seleccion": "2 (Suiza)", "cuota": 1.26 }
+      ]
+    },
+    "resultado_partido": {
+      "nombre": "Resultado del partido",
+      "tipo": "1X2",
+      "cuotas": [
+        { "seleccion": "1 (Catar)", "cuota": 12.00 },
+        { "seleccion": "X (Empate)", "cuota": 5.90 },
+        { "seleccion": "2 (Suiza)", "cuota": 1.25 }
+      ]
+    },
+    "doble_oportunidad": {
+      "nombre": "Doble oportunidad",
+      "tipo": "doble_oportunidad",
+      "cuotas": [
+        { "seleccion": "Catar o Empate", "cuota": 4.50 },
+        { "seleccion": "Catar o Suiza", "cuota": 1.12 },
+        { "seleccion": "Suiza o Empate", "cuota": 1.05 }
+      ]
+    },
+    "goles_totales_mas_menos": {
+      "nombre": "Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 2.5", "cuota": 1.65 },
+        { "seleccion": "Menos 2.5", "cuota": 2.25 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 1.22 },
+        { "seleccion": "Menos 1.5", "cuota": 4.40 },
+        { "seleccion": "Más 3.5", "cuota": 2.60 },
+        { "seleccion": "Menos 3.5", "cuota": 1.50 }
+      ]
+    },
+    "ambos_equipos_anotan": {
+      "nombre": "Ambos equipos anotan",
+      "tipo": "si_no",
+      "cuotas": [
+        { "seleccion": "Sí", "cuota": 2.40 },
+        { "seleccion": "No", "cuota": 1.53 }
+      ]
+    },
+    "corners_mas_menos": {
+      "nombre": "Córners Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 9.5", "cuota": 1.88 },
+        { "seleccion": "Menos 9.5", "cuota": 1.87 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 8.5", "cuota": 1.53 },
+        { "seleccion": "Menos 8.5", "cuota": 2.40 },
+        { "seleccion": "Más 10.5", "cuota": 2.45 },
+        { "seleccion": "Menos 10.5", "cuota": 1.52 }
+      ]
+    },
+    "tarjetas_totales_mas_menos": {
+      "nombre": "Tarjetas Totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 3.5", "cuota": 2.12 },
+        { "seleccion": "Menos 3.5", "cuota": 1.67 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 2.5", "cuota": 1.50 },
+        { "seleccion": "Menos 2.5", "cuota": 2.45 },
+        { "seleccion": "Más 4.5", "cuota": 3.20 },
+        { "seleccion": "Menos 4.5", "cuota": 1.32 }
+      ]
+    },
+    "resultado_primer_tiempo": {
+      "nombre": "Resultado Primer Tiempo",
+      "tipo": "1X2",
+      "cuotas": [
+        { "seleccion": "1 (Catar)", "cuota": 10.00 },
+        { "seleccion": "X (Empate)", "cuota": 2.82 },
+        { "seleccion": "2 (Suiza)", "cuota": 1.57 }
+      ]
+    },
+    "corners_mas_menos_principal_solo": { "_comment": "ver corners_mas_menos" },
+    "catar_goles_mas_menos": {
+      "nombre": "Catar - Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 0.5", "cuota": 2.25 },
+        { "seleccion": "Menos 0.5", "cuota": 1.60 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 6.60 },
+        { "seleccion": "Menos 1.5", "cuota": 1.09 }
+      ]
+    },
+    "suiza_goles_mas_menos": {
+      "nombre": "Suiza - Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 2.5", "cuota": 2.05 },
+        { "seleccion": "Menos 2.5", "cuota": 1.72 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 1.35 },
+        { "seleccion": "Menos 1.5", "cuota": 3.05 },
+        { "seleccion": "Más 3.5", "cuota": 3.50 },
+        { "seleccion": "Menos 3.5", "cuota": 1.28 }
+      ]
+    },
+    "ambos_anotan_o_mas_2_5": {
+      "nombre": "Ambos equipos anotan o Más 2.5",
+      "tipo": "si_no",
+      "cuotas": [
+        { "seleccion": "Sí", "cuota": 1.47 },
+        { "seleccion": "No", "cuota": 2.55 }
+      ]
+    },
+    "apuesta_sin_empate": {
+      "nombre": "Apuesta sin Empate",
+      "tipo": "1_2",
+      "cuotas": [
+        { "seleccion": "Catar", "cuota": 8.00 },
+        { "seleccion": "Suiza", "cuota": 1.06 }
+      ]
+    },
+    "marcador_correcto": {
+      "nombre": "Marcador Correcto",
+      "tipo": "marcador_exacto",
+      "cuotas": [
+        { "seleccion": "1-0", "cuota": 24.00 },
+        { "seleccion": "2-0", "cuota": 110.00 },
+        { "seleccion": "2-1", "cuota": 45.00 },
+        { "seleccion": "0-0", "cuota": 11.25 },
+        { "seleccion": "1-1", "cuota": 13.00 },
+        { "seleccion": "2-2", "cuota": 37.00 },
+        { "seleccion": "0-1", "cuota": 6.10 },
+        { "seleccion": "0-2", "cuota": 5.80 },
+        { "seleccion": "1-2", "cuota": 10.50 }
+      ]
+    },
+    "tiros_al_arco": {
+      "nombre": "Tiros al Arco",
+      "tipo": "tiros_jugador",
+      "jugadores": {
+        "catar": [
+          { "jugador": "Mohammed Muntari", "cuotas": { "1+": 1.90, "2+": 5.40, "3+": 14.00, "4+": 22.00 } },
+          { "jugador": "Almoez Ali", "cuotas": { "1+": 1.95, "2+": 5.70, "3+": 15.00, "4+": 23.00 } },
+          { "jugador": "Ahmed Alaaeldin", "cuotas": { "1+": 1.98, "2+": 5.80, "3+": 15.00, "4+": 23.00 } },
+          { "jugador": "Tahsin Jamshid", "cuotas": { "1+": 2.57, "2+": 9.25, "3+": 20.00 } }
+        ],
+        "suiza": [
+          { "jugador": "Zeki Amdouni", "cuotas": { "1+": 1.11, "2+": 1.60, "3+": 2.72, "4+": 5.50, "5+": 11.00 } },
+          { "jugador": "Cedric Itten", "cuotas": { "1+": 1.13, "2+": 1.70, "3+": 3.10, "4+": 6.40, "5+": 12.50 } },
+          { "jugador": "Breel Embolo", "cuotas": { "1+": 1.17, "2+": 1.85, "3+": 3.60, "4+": 7.70, "5+": 14.50 } },
+          { "jugador": "Noah Okafor", "cuotas": { "1+": 1.31, "2+": 2.42, "3+": 5.60, "4+": 12.50, "5+": 20.00 } }
+        ]
+      }
+    },
+    "goleador": {
+      "nombre": "Goleador",
+      "tipo": "goleador_jugador",
+      "columnas": ["cualquier_momento", "primero", "ultimo"],
+      "jugadores": {
+        "catar": [
+          { "jugador": "Almoez Ali", "cualquier_momento": 5.50, "primero": 12.00, "ultimo": 12.00 },
+          { "jugador": "Akram Afif", "cualquier_momento": 6.00, "primero": 13.00, "ultimo": 13.00 },
+          { "jugador": "Ahmed Alaaeldin", "cualquier_momento": 6.00, "primero": 13.00, "ultimo": 13.00 },
+          { "jugador": "Mohammed Muntari", "cualquier_momento": 6.00, "primero": 13.00, "ultimo": 13.00 }
+        ],
+        "suiza": [
+          { "jugador": "Breel Embolo", "cualquier_momento": 1.80, "primero": 3.45, "ultimo": 3.45 },
+          { "jugador": "Cedric Itten", "cualquier_momento": 2.00, "primero": 3.95, "ultimo": 3.95 },
+          { "jugador": "Zeki Amdouni", "cualquier_momento": 2.10, "primero": 4.20, "ultimo": 4.20 },
+          { "jugador": "Noah Okafor", "cualquier_momento": 2.40, "primero": 5.00, "ultimo": 5.00 }
+        ]
+      }
+    }
+  }
+}

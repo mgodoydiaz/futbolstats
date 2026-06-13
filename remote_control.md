@@ -5,6 +5,45 @@ Entrada más reciente arriba.
 
 ---
 
+## Sesión 2026-06-10 (cont.) — Predictor de partido + cuotas de Betano
+
+**Pedido:** modelar Catar vs Suiza con cuotas reales de Betano (vía Chrome MCP /
+JSON extraído del navegador), un predictor de partido genérico, reglas de
+scouting en markdown, momentum de equipos, y conclusión sobre si hace falta
+entrenar.
+
+### Entregables
+| Archivo | Qué hace |
+|---------|----------|
+| [`lib/match_model.py`](lib/match_model.py) | Modelo de equipo: goles esperados (shrinkage) → matriz Poisson → 1X2, totales, BTTS, marcador, corners, tarjetas. |
+| [`lib/odds_betano.py`](lib/odds_betano.py) | Parser del JSON de Betano → estructuras normalizadas. |
+| [`08_models/predict_match.py`](08_models/predict_match.py) | Orquestador: cruza modelo de equipo + props de jugador (matching difuso de nombres) con cuotas Betano → tabla de EV. |
+| [`06_ingestion/betano_extract.md`](06_ingestion/betano_extract.md) | Por qué no se scrapea con requests (DataDome), cómo extraer del navegador. |
+| [`04_history/scouting_rules.md`](04_history/scouting_rules.md) | Reglas de modelado + tendencias por equipo/jugador. |
+
+### Resultado Catar vs Suiza (validado)
+- Corrió end-to-end: **71 mercados valuados, 21 con EV>0**.
+- Goles esperados: Catar 1.37 — Suiza 2.29.
+
+### Hallazgo crítico (honesto)
+Los EV más altos (Catar gana, Catar marca, totales altos) son **falsos positivos**:
+el shrinkage **sobre-estima a Catar** (3 partidos, hace 3.5 años) empujándolo a la
+media global. El mercado tiene razón, el modelo no. El lado confiable es Suiza
+(18 PJ) y los props de jugadores con muestra.
+
+### Sobre scraping de Betano
+DataDome bloquea requests directos; **las credenciales NO ayudan** (es bot-detection,
+no login). El flujo correcto: extraer el JSON del navegador (JS o Chrome MCP) y
+parsearlo con `lib/odds_betano.py`. La pieza Python durable es el parser+modelo.
+
+### Conclusión: ¿entrenar o modelar ya?
+Se puede modelar YA (corre sobre cuotas reales). Para CONFIAR falta: (1) datos
+recientes de equipos flojos, (2) mejor estimación de goles esperados que no
+sobre-encoja a los débiles (o blend con el mercado), (3) ajuste por rival. No es
+"entrenar un ML pesado" — es mejorar el team-strength y conseguir más datos.
+
+---
+
 ## Sesión 2026-06-10 (cont.) — Modelo de goleo y predicciones del Mundial 2026
 
 **Pedido:** modelo de goleo/tarjetas decente que sirva para backtest y Mundial,
