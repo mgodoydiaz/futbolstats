@@ -37,6 +37,11 @@ downloaded_files/driver_fixing.lock
 10_serving/worldcup/value_board_*
 10_serving/worldcup/dashboard.html
 
+# Match prediction outputs — derived from Betano JSON. Regenerate with
+# 08_models/predict_match.py + 10_serving/build_match_dashboard.py.
+10_serving/matches/*.html
+10_serving/matches/*_pred.md
+
 # OS
 .DS_Store
 Thumbs.db

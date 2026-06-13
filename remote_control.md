@@ -5,6 +5,41 @@ Entrada más reciente arriba.
 
 ---
 
+## Sesión 2026-06-10 (cont.) — Blend con el mercado + dashboard HTML
+
+**Pedido:** implementar el paso 2 (blend modelo↔mercado para amansar la sobre-
+estimación de equipos flojos), una página HTML simple con tablas (cuota, % casa
+1/cuota, p_model, EV) para consumo propio, y agregar Brasil-Marruecos y
+Haití-Escocia.
+
+### Entregables
+| Archivo | Qué hace |
+|---------|----------|
+| [`08_models/predict_match.py`](08_models/predict_match.py) | Reescrito con **blend**: `p_blend = w·p_model + (1−w)·p_market_devig`, `w = n_eff/(n_eff+6)`. Des-viga 1X2/totales/BTTS/corners/tarjetas; marcador correcto se blendea contra implícita cruda; props de jugador quedan model-only. |
+| [`10_serving/build_match_dashboard.py`](10_serving/build_match_dashboard.py) | Lee todos los `betano_*.json` y arma una página HTML con una tabla por partido (cuota, % casa, p_model, p_blend, EV). |
+
+### Efecto del blend (Catar vs Suiza)
+- "Catar gana" pasó de EV +166% (model) a **+52%** (blend, n_eff=3 → peso modelo 0.33).
+- "Catar over 1.5" de +162% a +50%. Los falsos positivos quedaron amansados.
+
+### Cobertura de los partidos nuevos
+- **Brasil** (14 PJ) y **Marruecos** (10 PJ): modelo completo posible.
+- **Escocia** (6 PJ): ok. **Haití masculino: SIN DATOS** → Haití-Escocia sólo
+  mostraría cuotas + % casa, sin p_model del lado Haití.
+
+### Sobre obtener las cuotas (Chrome MCP)
+Betano renderiza las cuotas server-side y exige el **ID numérico** del partido en
+la URL (el slug solo da 404). No hay API de cuotas limpia (sí una de H2H:
+`/api/statistics/events/<id>/h2h/`, útil para momentum). Conclusión: el extractor
+JS sobre el DOM (lo que ya hace el usuario) es el camino confiable. El dashboard
+incluye automáticamente cualquier `betano_*.json` que se deje en `01_data_raw/odds/`.
+
+### Pendiente
+- JSON de Brasil-Marruecos y Haití-Escocia (extraer con el snippet).
+- Opcional: cliente de la API H2H de Betano para momentum real (forma reciente).
+
+---
+
 ## Sesión 2026-06-10 (cont.) — Predictor de partido + cuotas de Betano
 
 **Pedido:** modelar Catar vs Suiza con cuotas reales de Betano (vía Chrome MCP /
