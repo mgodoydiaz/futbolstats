@@ -1,0 +1,63 @@
+{
+  "partido": "Brasil vs Marruecos",
+  "competicion": "Copa del Mundo FIFA",
+  "fecha": "Sábado, 13 Junio 2026 18:00",
+  "hora": "18:00",
+  "fuente": "lat.betano.com",
+  "mercados": {
+    "resultado_partido": {
+      "nombre": "Resultado del partido",
+      "tipo": "1X2",
+      "cuotas": [
+        { "seleccion": "1 (Brasil)", "cuota": 1.72 },
+        { "seleccion": "X (Empate)", "cuota": 3.55 },
+        { "seleccion": "2 (Marruecos)", "cuota": 5.30 }
+      ]
+    },
+    "doble_oportunidad": {
+      "nombre": "Doble oportunidad",
+      "tipo": "doble_oportunidad",
+      "cuotas": [
+        { "seleccion": "Brasil o Empate", "cuota": 1.18 },
+        { "seleccion": "Brasil o Marruecos", "cuota": 1.28 },
+        { "seleccion": "Marruecos o Empate", "cuota": 2.15 }
+      ]
+    },
+    "goles_totales_mas_menos": {
+      "nombre": "Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 2.5", "cuota": 2.15 },
+        { "seleccion": "Menos 2.5", "cuota": 1.72 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 1.39 },
+        { "seleccion": "Menos 1.5", "cuota": 3.05 },
+        { "seleccion": "Más 3.5", "cuota": 3.80 },
+        { "seleccion": "Menos 3.5", "cuota": 1.27 }
+      ]
+    },
+    "ambos_equipos_anotan": {
+      "nombre": "Ambos equipos anotan",
+      "tipo": "si_no",
+      "cuotas": [
+        { "seleccion": "Sí", "cuota": 2.00 },
+        { "seleccion": "No", "cuota": 1.75 }
+      ]
+    },
+    "corners_mas_menos": {
+      "nombre": "Córners Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 8.5", "cuota": 1.95 },
+        { "seleccion": "Menos 8.5", "cuota": 1.80 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 7.5", "cuota": 1.53 },
+        { "seleccion": "Menos 7.5", "cuota": 2.40 },
+        { "seleccion": "Más 9.5", "cuota": 2.57 },
+        { "seleccion": "Menos 9.5", "cuota": 1.47 }
+      ]
+    }
+  }
+}

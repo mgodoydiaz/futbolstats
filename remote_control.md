@@ -34,8 +34,17 @@ la URL (el slug solo da 404). No hay API de cuotas limpia (sí una de H2H:
 JS sobre el DOM (lo que ya hace el usuario) es el camino confiable. El dashboard
 incluye automáticamente cualquier `betano_*.json` que se deje en `01_data_raw/odds/`.
 
+### Actualización: Brasil-Marruecos extraído y corrido
+Extraje las cuotas de Brasil-Marruecos (77351978) vía Chrome MCP. Predictor corrió:
+- **n_eff=10** (Brasil 14 PJ, Marruecos 10 PJ) → peso modelo 0.62, **creíble**.
+- Goles esperados: Brasil 1.12, Marruecos 0.99 (partido bajo de goles, defensa solid).
+- **Top EV**: Marruecos gana a 5.30 (+41%), Corners over 9.5 (+12%).
+- El blend amansa la volatilidad: Marruecos sale como favorito en valor a pesar de ser la cuota más alta.
+
+Dashboard regenerado: **2 partidos** (Catar-Suiza, Brasil-Marruecos).
+
 ### Pendiente
-- JSON de Brasil-Marruecos y Haití-Escocia (extraer con el snippet).
+- JSON de Haití-Escocia (extraer con el snippet).
 - Opcional: cliente de la API H2H de Betano para momentum real (forma reciente).
 
 ---
