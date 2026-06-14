@@ -1,0 +1,98 @@
+{
+  "partido": "Países Bajos vs Japón",
+  "competicion": "Copa del Mundo FIFA",
+  "fecha": "2026-06-14",
+  "fuente": "lat.betano.com",
+  "url": "https://lat.betano.com/cuotas-de-partido/paises-bajos-japon/77352559/",
+  "mercados": {
+    "resultado_partido": {
+      "nombre": "Resultado del partido",
+      "tipo": "1X2",
+      "cuotas": [
+        { "seleccion": "1 (Países Bajos)", "cuota": 2.1 },
+        { "seleccion": "X (Empate)", "cuota": 3.4 },
+        { "seleccion": "2 (Japón)", "cuota": 3.6 }
+      ]
+    },
+    "goles_totales_mas_menos": {
+      "nombre": "Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 2.5", "cuota": 2.02 },
+        { "seleccion": "Menos 2.5", "cuota": 1.8 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 1.35 },
+        { "seleccion": "Menos 1.5", "cuota": 3.25 },
+        { "seleccion": "Más 3.5", "cuota": 3.5 },
+        { "seleccion": "Menos 3.5", "cuota": 1.31 }
+      ]
+    },
+    "ambos_equipos_anotan": {
+      "nombre": "Ambos equipos anotan",
+      "tipo": "si_no",
+      "cuotas": [
+        { "seleccion": "Sí", "cuota": 1.8 },
+        { "seleccion": "No", "cuota": 1.95 }
+      ]
+    },
+    "corners_mas_menos": {
+      "nombre": "Córners Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 8.5", "cuota": 1.67 },
+        { "seleccion": "Menos 8.5", "cuota": 2.12 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 7.5", "cuota": 1.37 },
+        { "seleccion": "Menos 7.5", "cuota": 2.92 },
+        { "seleccion": "Más 9.5", "cuota": 2.12 },
+        { "seleccion": "Menos 9.5", "cuota": 1.67 }
+      ]
+    },
+    "tarjetas_totales_mas_menos": {
+      "nombre": "Tarjetas Totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 2.5", "cuota": 1.62 },
+        { "seleccion": "Menos 2.5", "cuota": 2.2 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 1.24 },
+        { "seleccion": "Menos 1.5", "cuota": 3.8 },
+        { "seleccion": "Más 3.5", "cuota": 2.35 },
+        { "seleccion": "Menos 3.5", "cuota": 1.55 },
+        { "seleccion": "Más 4.5", "cuota": 2.05 },
+        { "seleccion": "Menos 4.5", "cuota": 1.72 }
+      ]
+    },
+    "local_goles_mas_menos": {
+      "nombre": "Países Bajos - Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 1.5", "cuota": 2.12 },
+        { "seleccion": "Menos 1.5", "cuota": 1.67 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 0.5", "cuota": 1.25 },
+        { "seleccion": "Menos 0.5", "cuota": 3.65 },
+        { "seleccion": "Más 2.5", "cuota": 4.3 },
+        { "seleccion": "Menos 2.5", "cuota": 1.19 }
+      ]
+    },
+    "visita_goles_mas_menos": {
+      "nombre": "Japón - Goles totales Más/Menos",
+      "tipo": "mas_menos",
+      "principal": [
+        { "seleccion": "Más 0.5", "cuota": 1.44 },
+        { "seleccion": "Menos 0.5", "cuota": 2.67 }
+      ],
+      "alternativas": [
+        { "seleccion": "Más 1.5", "cuota": 3.05 },
+        { "seleccion": "Menos 1.5", "cuota": 1.35 },
+        { "seleccion": "Más 2.5", "cuota": 7.1 },
+        { "seleccion": "Menos 2.5", "cuota": 1.08 }
+      ]
+    }
+  }
+}

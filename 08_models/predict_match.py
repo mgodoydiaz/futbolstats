@@ -162,7 +162,9 @@ def predict(odds_path: Path, team_a_override=None, team_b_override=None):
                 py, pn = remove_vig([yn["yes"], yn["no"]])
                 _emit(rows, "Ambos anotan", "sí", mk["btts_yes"], yn["yes"], py, n_eff)
                 _emit(rows, "Ambos anotan", "no", mk["btts_no"], yn["no"], pn, n_eff)
-        for key, lam, tname in [("catar_goles_mas_menos", lam_a, team_a),
+        for key, lam, tname in [("local_goles_mas_menos", lam_a, team_a),
+                                ("visita_goles_mas_menos", lam_b, team_b),
+                                ("catar_goles_mas_menos", lam_a, team_a),
                                 ("suiza_goles_mas_menos", lam_b, team_b),
                                 ("brasil_goles_mas_menos", lam_a, team_a),
                                 ("marruecos_goles_mas_menos", lam_b, team_b)]:
